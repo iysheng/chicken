@@ -76,7 +76,10 @@ extern  "C" {                                  /* See Note #1.                  
 #include  "bsp_clock.h"
 #include  "bsp_led.h"
 #include  "bsp_sdram.h"
-
+#include  "bsp_rgb.h"
+#include  "xiong.h"
+#include  "bsp_adc.h"
+#include  "bsp_touch.h"
 /*
 *********************************************************************************************************
 *                                               CONSTANTS

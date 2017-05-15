@@ -91,7 +91,8 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_type.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h \
- ../uc-bsp/bsp_os.h
+ ../uc-bsp/bsp_rgb.h ../uc-bsp/font.h ../uc-bsp/xiong.h \
+ ../uc-bsp/bsp_adc.h ../uc-bsp/bsp_touch.h ../uc-bsp/bsp_os.h
 
 C:\Users\iysheng\workspace\chicken\uC-CPU/cpu_core.h:
 
@@ -284,5 +285,15 @@ C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_type.h:
 C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h:
 
 C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h:
+
+../uc-bsp/bsp_rgb.h:
+
+../uc-bsp/font.h:
+
+../uc-bsp/xiong.h:
+
+../uc-bsp/bsp_adc.h:
+
+../uc-bsp/bsp_touch.h:
 
 ../uc-bsp/bsp_os.h:

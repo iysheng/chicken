@@ -13,6 +13,7 @@ C_SRCS += \
 ../hallib/Src/stm32f7xx_hal_pwr.c \
 ../hallib/Src/stm32f7xx_hal_pwr_ex.c \
 ../hallib/Src/stm32f7xx_hal_rcc.c \
+../hallib/Src/stm32f7xx_hal_rcc_ex.c \
 ../hallib/Src/stm32f7xx_hal_sdram.c \
 ../hallib/Src/stm32f7xx_hal_tim.c \
 ../hallib/Src/stm32f7xx_hal_tim_ex.c \
@@ -29,6 +30,7 @@ OBJS += \
 ./hallib/Src/stm32f7xx_hal_pwr.o \
 ./hallib/Src/stm32f7xx_hal_pwr_ex.o \
 ./hallib/Src/stm32f7xx_hal_rcc.o \
+./hallib/Src/stm32f7xx_hal_rcc_ex.o \
 ./hallib/Src/stm32f7xx_hal_sdram.o \
 ./hallib/Src/stm32f7xx_hal_tim.o \
 ./hallib/Src/stm32f7xx_hal_tim_ex.o \
@@ -45,6 +47,7 @@ C_DEPS += \
 ./hallib/Src/stm32f7xx_hal_pwr.d \
 ./hallib/Src/stm32f7xx_hal_pwr_ex.d \
 ./hallib/Src/stm32f7xx_hal_rcc.d \
+./hallib/Src/stm32f7xx_hal_rcc_ex.d \
 ./hallib/Src/stm32f7xx_hal_sdram.d \
 ./hallib/Src/stm32f7xx_hal_tim.d \
 ./hallib/Src/stm32f7xx_hal_tim_ex.d \

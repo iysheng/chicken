@@ -87,6 +87,11 @@ hallib/stm32f7xx_hal_msp.o: ../hallib/stm32f7xx_hal_msp.c \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_sdram.h \
  C:\Users\iysheng\workspace\chicken\hallib/main.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_rgb.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/font.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/xiong.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_adc.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_touch.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h \
  C:\Users\iysheng\workspace\chicken\uc-config/os_cfg.h \
  C:\Users\iysheng\workspace\chicken\uc-config/os_cfg_app.h \
@@ -271,6 +276,16 @@ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h:
 C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_sdram.h:
 
 C:\Users\iysheng\workspace\chicken\hallib/main.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_rgb.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/font.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/xiong.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_adc.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_touch.h:
 
 C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h:
 
