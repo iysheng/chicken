@@ -71,6 +71,10 @@ extern  "C" {                                  /* See Note #1.                  
 *                                              INCLUDE FILES
 *********************************************************************************************************
 */
+#include  "bsp_uart.h"
+#include  "bsp_tim.h"
+#include  "bsp_clock.h"
+#include  "bsp_led.h"
 
 
 /*

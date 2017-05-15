@@ -81,17 +81,19 @@ uc-config/app_main.o: ../uc-config/app_main.c \
  C:\Users\iysheng\workspace\chicken\uc-config/lib_cfg.h \
  C:\Users\iysheng\workspace\chicken\uC-LIB/lib_str.h \
  C:\Users\iysheng\workspace\chicken\uC-LIB/lib_ascii.h \
+ C:\Users\iysheng\workspace\chicken\uc-config/os_app_hooks.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h \
  C:\Users\iysheng\workspace\chicken\uc-config/os_cfg.h \
  C:\Users\iysheng\workspace\chicken\uc-config/os_cfg_app.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_type.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h \
  C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h \
- C:\Users\iysheng\workspace\chicken\uc-config/os_app_hooks.h \
  C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp.h \
- C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h \
- C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_clock.h
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_uart.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_tim.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_clock.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h
 
 C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h:
 
@@ -257,6 +259,8 @@ C:\Users\iysheng\workspace\chicken\uC-LIB/lib_str.h:
 
 C:\Users\iysheng\workspace\chicken\uC-LIB/lib_ascii.h:
 
+C:\Users\iysheng\workspace\chicken\uc-config/os_app_hooks.h:
+
 C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h:
 
 C:\Users\iysheng\workspace\chicken\uc-config/os_cfg.h:
@@ -269,12 +273,14 @@ C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cp
 
 C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h:
 
-C:\Users\iysheng\workspace\chicken\uc-config/os_app_hooks.h:
-
 C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h:
 
 C:\Users\iysheng\workspace\chicken\uc-bsp/bsp.h:
 
-C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h:
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_uart.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_tim.h:
 
 C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_clock.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h:

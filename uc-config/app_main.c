@@ -47,15 +47,14 @@
 #include  <cpu.h>
 #include  <lib_math.h>
 #include  <lib_mem.h>
-#include  <os.h>
 #include  <os_app_hooks.h>
 
 #include  <app_cfg.h>
 #include  <bsp.h>
-#include  <bsp_led.h>
-#include  <bsp_clock.h>
 
 extern UART_HandleTypeDef UART_DEBUG;
+extern uint32_t ic_value;            //捕获的计数值
+extern uint8_t ic_state;              //捕获的状态值
 
 /*
 *********************************************************************************************************
@@ -147,7 +146,8 @@ int main(void)
                   0u,
                  (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  &err);
-    OSTaskDel((OS_TCB*)0,&err);
+    //OSTaskDel((OS_TCB*)0,&err);
+   // OSTaskDel(&AppTaskStartTCB,&err);
     OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
 
     while (DEF_ON) {                                            /* Should Never Get Here.                               */
@@ -176,7 +176,6 @@ static  void  AppTaskStart (void *p_arg)
 {
     OS_ERR  err;
 
-
    (void)p_arg;
 
     BSP_Init();                                                 /* Initialize BSP functions                             */
@@ -193,10 +192,10 @@ static  void  AppTaskStart (void *p_arg)
     AppTaskCreate();                                            /* Create Application tasks                             */
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-        BSP_LED_Toggle(0u);
-        OSTimeDlyHMSM(0u, 0u, 1u, 100u,
-                      OS_OPT_TIME_HMSM_STRICT,
-                      &err);
+    	OSTimeDlyHMSM( 0u, 1u, 0u, 0u,
+    	                       OS_OPT_TIME_HMSM_STRICT,
+    	                      &err);
+    	;
     }
 }
 
@@ -224,7 +223,7 @@ static  void  AppTaskCreate (void)
                  "Kernel Objects Task 0",
                   AppTaskObj0,
                   0,
-                  APP_CFG_TASK_OBJ_PRIO,
+                  APP_CFG_TASK_OBJ0_PRIO,
                  &AppTaskObj0Stk[0],
                   AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
                   APP_CFG_TASK_OBJ_STK_SIZE,
@@ -238,7 +237,7 @@ static  void  AppTaskCreate (void)
                  "Kernel Objects Task 0",
                   AppTaskObj1,
                   0,
-                  APP_CFG_TASK_OBJ_PRIO+1,
+                  APP_CFG_TASK_OBJ1_PRIO+1,
                  &AppTaskObj1Stk[0],
                   AppTaskObj1Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
                   APP_CFG_TASK_OBJ_STK_SIZE,
@@ -247,7 +246,6 @@ static  void  AppTaskCreate (void)
                   0,
                  (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  &os_err);
-
 }
 
 /*
@@ -271,10 +269,21 @@ static  void  AppTaskObj0 (void  *p_arg)
     OS_ERR  os_err;
 
     (void)p_arg;
-
-
+    uint64_t hole_ic_value;//捕获的计数值
+    char rstr[64];
     while (DEF_TRUE) {
-    	BSP_LED_On(1);
+    	BSP_LED_On(0);
+    	 if(ic_state>7)
+    	    {
+    	      ic_state&=0x3f;
+    	      hole_ic_value=ic_state*(0xffffffff);
+    	      hole_ic_value+=ic_value;
+    	      ic_value=hole_ic_value/1000;
+    	      sprintf((char *)rstr,"PWM:%6dms...%9lldus",(int)ic_value,(long long int)hole_ic_value);
+    	      //LCD_ShowString(120,50,strlen(rstr)*16,32,32,(uint8_t *)rstr);
+    	      printf("%s\r\n",rstr);
+    	      ic_state=0x00;
+    	    }
         OSTimeDlyHMSM( 0u, 0u, 1u, 0u,
                        OS_OPT_TIME_HMSM_STRICT,
                       &os_err);
@@ -305,7 +314,7 @@ static  void  AppTaskObj1 (void  *p_arg)
     (void)p_arg;
 
     while (DEF_TRUE) {
-        BSP_LED_Off(1);
+        BSP_LED_Off(0);
         OSTimeDlyHMSM( 0u, 0u, 1u, 0u,
                        OS_OPT_TIME_HMSM_STRICT,
                       &os_err);

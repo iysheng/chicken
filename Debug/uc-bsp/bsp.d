@@ -8,9 +8,9 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c \
  C:\Users\iysheng\workspace\chicken\uc-config/lib_cfg.h \
  C:\Users\iysheng\workspace\chicken\uC-LIB/lib_str.h \
  C:\Users\iysheng\workspace\chicken\uC-LIB/lib_ascii.h \
- C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h \
- ../uc-bsp/bsp_clock.h ../uc-bsp/bsp_led.h ../uc-bsp/bsp_uart.h \
- ../uc-bsp/bsp_os.h \
+ C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h ../uc-bsp/bsp.h \
+ ../uc-bsp/bsp_uart.h ../uc-bsp/bsp_tim.h ../uc-bsp/bsp_clock.h \
+ ../uc-bsp/bsp_led.h ../uc-bsp/bsp_os.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h \
  C:\Users\iysheng\workspace\chicken\hallib/stm32f7xx_hal_conf.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc.h \
@@ -104,11 +104,15 @@ C:\Users\iysheng\workspace\chicken\uC-LIB/lib_ascii.h:
 
 C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h:
 
+../uc-bsp/bsp.h:
+
+../uc-bsp/bsp_uart.h:
+
+../uc-bsp/bsp_tim.h:
+
 ../uc-bsp/bsp_clock.h:
 
 ../uc-bsp/bsp_led.h:
-
-../uc-bsp/bsp_uart.h:
 
 ../uc-bsp/bsp_os.h:
 

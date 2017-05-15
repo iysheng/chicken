@@ -9,7 +9,8 @@
 #define HALLIB_MAIN_H_
 
 #include "stm32f7xx.h"
-//#include "stm32f7xx_hal.h"
-
+#include "stm32f7xx_hal.h"
+#include "bsp.h"
+#include <os.h>
 
 #endif /* HALLIB_MAIN_H_ */

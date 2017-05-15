@@ -42,9 +42,7 @@
 #include  <cpu_core.h>
 #include  <app_cfg.h>
 
-#include  "bsp_clock.h"
-#include  "bsp_led.h"
-#include  "bsp_uart.h"
+#include  "bsp.h"
 #include  "bsp_os.h"
 
 #include  "stm32f7xx_hal.h"
@@ -115,5 +113,10 @@ void  BSP_Init (void)
     BSP_LED_Init();                                             /* Init LEDs.                                           */
 
     BSP_UART_Init();
+
+    TIM2_init();     //定时器2周期采样ADC的值
+    TIM3_init();     //定时器3输出PWM供测试使用
+    TIM5_init();     //定时器5输入捕获计算频率
+
 
 }

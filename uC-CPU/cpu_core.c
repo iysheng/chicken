@@ -1023,7 +1023,6 @@ void  CPU_IntDisMeasStop (void)
 {
     CPU_TS_TMR  time_ints_disd_cnts;
 
-
     CPU_IntDisNestCtr--;
     if (CPU_IntDisNestCtr == 0u) {                                  /* If ints NO longer dis'd,        ...              */
         CPU_IntDisMeasStop_cnts = CPU_TS_TmrRd();                   /* ... get  ints dis'd stop time & ...              */

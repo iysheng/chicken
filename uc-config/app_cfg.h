@@ -50,8 +50,8 @@
 */
 
 #define  APP_CFG_TASK_START_PRIO                2u
-#define  APP_CFG_TASK_OBJ_PRIO                  3u
-#define  APP_CFG_TASK_EQ_PRIO                   4u
+#define  APP_CFG_TASK_OBJ0_PRIO                  3u
+#define  APP_CFG_TASK_OBJ1_PRIO                  3u
 
 
 /*
