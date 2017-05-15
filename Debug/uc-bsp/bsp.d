@@ -10,11 +10,8 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c \
  C:\Users\iysheng\workspace\chicken\uC-LIB/lib_ascii.h \
  C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h ../uc-bsp/bsp.h \
  ../uc-bsp/bsp_uart.h ../uc-bsp/bsp_tim.h ../uc-bsp/bsp_clock.h \
- ../uc-bsp/bsp_led.h ../uc-bsp/bsp_os.h \
- C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h \
- C:\Users\iysheng\workspace\chicken\hallib/stm32f7xx_hal_conf.h \
- C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc.h \
- C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_def.h \
+ ../uc-bsp/bsp_led.h ../uc-bsp/bsp_sdram.h \
+ C:\Users\iysheng\workspace\chicken\hallib/main.h \
  C:\Users\iysheng\workspace\chicken\core/stm32f7xx.h \
  C:\Users\iysheng\workspace\chicken\core/stm32f767xx.h \
  C:\Users\iysheng\workspace\chicken\core/core_cm7.h \
@@ -23,6 +20,9 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c \
  C:\Users\iysheng\workspace\chicken\core/core_cmFunc.h \
  C:\Users\iysheng\workspace\chicken\core/core_cmSimd.h \
  C:\Users\iysheng\workspace\chicken\core/system_stm32f7xx.h \
+ C:\Users\iysheng\workspace\chicken\hallib/stm32f7xx_hal_conf.h \
+ C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc.h \
+ C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_def.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/Legacy/stm32_hal_legacy.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc_ex.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_gpio.h \
@@ -82,7 +82,16 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_hcd.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_dfsdm.h \
  C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_jpeg.h \
- C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_mdios.h
+ C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_mdios.h \
+ C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp.h \
+ C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h \
+ C:\Users\iysheng\workspace\chicken\uc-config/os_cfg.h \
+ C:\Users\iysheng\workspace\chicken\uc-config/os_cfg_app.h \
+ C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_type.h \
+ C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h \
+ C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h \
+ ../uc-bsp/bsp_os.h
 
 C:\Users\iysheng\workspace\chicken\uC-CPU/cpu_core.h:
 
@@ -114,15 +123,9 @@ C:\Users\iysheng\workspace\chicken\uc-config/app_cfg.h:
 
 ../uc-bsp/bsp_led.h:
 
-../uc-bsp/bsp_os.h:
+../uc-bsp/bsp_sdram.h:
 
-C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h:
-
-C:\Users\iysheng\workspace\chicken\hallib/stm32f7xx_hal_conf.h:
-
-C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc.h:
-
-C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_def.h:
+C:\Users\iysheng\workspace\chicken\hallib/main.h:
 
 C:\Users\iysheng\workspace\chicken\core/stm32f7xx.h:
 
@@ -139,6 +142,12 @@ C:\Users\iysheng\workspace\chicken\core/core_cmFunc.h:
 C:\Users\iysheng\workspace\chicken\core/core_cmSimd.h:
 
 C:\Users\iysheng\workspace\chicken\core/system_stm32f7xx.h:
+
+C:\Users\iysheng\workspace\chicken\hallib/stm32f7xx_hal_conf.h:
+
+C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_rcc.h:
+
+C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_def.h:
 
 C:\Users\iysheng\workspace\chicken\hallib\Inc/Legacy/stm32_hal_legacy.h:
 
@@ -259,3 +268,21 @@ C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_dfsdm.h:
 C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_jpeg.h:
 
 C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal_mdios.h:
+
+C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp.h:
+
+C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os.h:
+
+C:\Users\iysheng\workspace\chicken\uc-config/os_cfg.h:
+
+C:\Users\iysheng\workspace\chicken\uc-config/os_cfg_app.h:
+
+C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_type.h:
+
+C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h:
+
+C:\Users\iysheng\workspace\chicken\uCOS-III\Source/os_trace.h:
+
+../uc-bsp/bsp_os.h:

@@ -8,6 +8,7 @@ C_SRCS += \
 ../uc-bsp/bsp_clock.c \
 ../uc-bsp/bsp_led.c \
 ../uc-bsp/bsp_os.c \
+../uc-bsp/bsp_sdram.c \
 ../uc-bsp/bsp_tim.c \
 ../uc-bsp/bsp_uart.c \
 ../uc-bsp/cpu_bsp.c 
@@ -17,6 +18,7 @@ OBJS += \
 ./uc-bsp/bsp_clock.o \
 ./uc-bsp/bsp_led.o \
 ./uc-bsp/bsp_os.o \
+./uc-bsp/bsp_sdram.o \
 ./uc-bsp/bsp_tim.o \
 ./uc-bsp/bsp_uart.o \
 ./uc-bsp/cpu_bsp.o 
@@ -26,6 +28,7 @@ C_DEPS += \
 ./uc-bsp/bsp_clock.d \
 ./uc-bsp/bsp_led.d \
 ./uc-bsp/bsp_os.d \
+./uc-bsp/bsp_sdram.d \
 ./uc-bsp/bsp_tim.d \
 ./uc-bsp/bsp_uart.d \
 ./uc-bsp/cpu_bsp.d 

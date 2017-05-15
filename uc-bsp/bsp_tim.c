@@ -8,14 +8,14 @@
 #include "main.h"
 
 TIM_HandleTypeDef ITIM2,ITIM3,ITIM5;
+TIM_MasterConfigTypeDef iMasterConfig;
+TIM_OC_InitTypeDef iConfig;
 uint32_t ic_value;//捕获的计数值
 uint8_t ic_state;//捕获的状态值
 
 void TIM2_init(void)
 {
-  TIM_MasterConfigTypeDef iMasterConfig;
   __HAL_RCC_TIM2_CLK_ENABLE();
-  memset(&iMasterConfig,0,sizeof(iMasterConfig));
   ITIM2.Instance=TIM2;
   ITIM2.Init.Period=1999;//周期为1000ms,频率1Hz
   ITIM2.Init.Prescaler=53999;//APB1=108MHz,采样时钟间隔为500us，频率为2khz
@@ -29,8 +29,6 @@ void TIM2_init(void)
 
 void TIM3_init(void)
 {
-  TIM_OC_InitTypeDef iConfig;
-  memset(&iConfig,0,sizeof(iConfig));
   __HAL_RCC_TIM3_CLK_ENABLE();
   ITIM3.Instance=TIM3;
   ITIM3.Init.Period=1999;//周期为1999--1000ms，频率为1hz
@@ -49,7 +47,6 @@ void TIM3_init(void)
 void TIM5_init(void)
 {
   static TIM_IC_InitTypeDef IC_Config;
-  static HAL_StatusTypeDef err;
   //memset(&IC_Config,0,sizeof(IC_Config));
   __HAL_RCC_TIM5_CLK_ENABLE();
   ITIM5.Instance=TIM5;
@@ -57,13 +54,13 @@ void TIM5_init(void)
   ITIM5.Init.CounterMode=TIM_COUNTERMODE_UP;
   ITIM5.Init.Period=0xffffffff;
   ITIM5.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
-  err=HAL_TIM_IC_Init(&ITIM5);
+  HAL_TIM_IC_Init(&ITIM5);
   IC_Config.ICPolarity=TIM_ICPOLARITY_RISING;
   IC_Config.ICPrescaler=TIM_ICPSC_DIV1;
   IC_Config.ICFilter=0;
   IC_Config.ICSelection=TIM_ICSELECTION_DIRECTTI;
-  err=HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_1);//TIM_CHANNEL_1 PA0
-  err=HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_1);//开启中断
+  HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_1);//TIM_CHANNEL_1 PA0
+  HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_1);//开启中断
   //HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_2);//TIM_CHANNEL_2 PA1
   //HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_2);//开启中断
 }

@@ -114,6 +114,7 @@ void  BSP_Init (void)
 
     BSP_UART_Init();
 
+    SDRAM_init();
     TIM2_init();     //定时器2周期采样ADC的值
     TIM3_init();     //定时器3输出PWM供测试使用
     TIM5_init();     //定时器5输入捕获计算频率

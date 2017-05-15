@@ -131,7 +131,7 @@ void  CPU_Cache_Init (void)
 
 static  CPU_INT32U  CPU_DCache_LineSizeGet (void)
 {
-    return (1u << ((SCS_CCSIDR & 0x7u)) + 2u);
+    return (1u << (SCS_CCSIDR & 0x7u)+ 2u);
 }
 
 

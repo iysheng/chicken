@@ -75,7 +75,7 @@ extern  "C" {                                  /* See Note #1.                  
 #include  "bsp_tim.h"
 #include  "bsp_clock.h"
 #include  "bsp_led.h"
-
+#include  "bsp_sdram.h"
 
 /*
 *********************************************************************************************************

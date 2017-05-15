@@ -56,6 +56,10 @@ extern UART_HandleTypeDef UART_DEBUG;
 extern uint32_t ic_value;            //捕获的计数值
 extern uint8_t ic_state;              //捕获的状态值
 
+//uint32_t sdram_addr=0xC0000000;       //测试sdram是否正常初始化
+
+uint16_t __attribute__((section(".sdram_section"))) testram[1280];
+
 /*
 *********************************************************************************************************
 *                                            LOCAL DEFINES
@@ -64,7 +68,6 @@ extern uint8_t ic_state;              //捕获的状态值
 
 #define  APP_TASK_EQ_0_ITERATION_NBR              16u
 #define  APP_TASK_EQ_1_ITERATION_NBR              18u
-
 
 /*
 *********************************************************************************************************
@@ -267,13 +270,17 @@ static  void  AppTaskCreate (void)
 static  void  AppTaskObj0 (void  *p_arg)
 {
     OS_ERR  os_err;
-
+    uint8_t sdram_str;
+    sdram_str='a';
     (void)p_arg;
     uint64_t hole_ic_value;//捕获的计数值
     char rstr[64];
     while (DEF_TRUE) {
-    	BSP_LED_On(0);
-    	 if(ic_state>7)
+    	BSP_LED_Off(0);
+        FMC_SDRAM_WriteBuffer(&sdram_str,0,1);
+        sdram_str++;
+        APP_TRACE_INFO(("Object test task 0 running ....\r\n"));
+    	 if(ic_state>>7)
     	    {
     	      ic_state&=0x3f;
     	      hole_ic_value=ic_state*(0xffffffff);
@@ -312,9 +319,11 @@ static  void  AppTaskObj1 (void  *p_arg)
 {
     OS_ERR       os_err;
     (void)p_arg;
-
+    uint8_t sdram_str[32];
     while (DEF_TRUE) {
-        BSP_LED_Off(0);
+        BSP_LED_On(0);
+    	FMC_SDRAM_ReadBuffer(sdram_str,0,1);
+    	printf("task 1 %c.\r\n",sdram_str[0]);
         OSTimeDlyHMSM( 0u, 0u, 1u, 0u,
                        OS_OPT_TIME_HMSM_STRICT,
                       &os_err);

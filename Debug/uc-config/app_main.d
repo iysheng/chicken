@@ -93,7 +93,9 @@ uc-config/app_main.o: ../uc-config/app_main.c \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_uart.h \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_tim.h \
  C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_clock.h \
- C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h \
+ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_sdram.h \
+ C:\Users\iysheng\workspace\chicken\hallib/main.h
 
 C:\Users\iysheng\workspace\chicken\hallib\Inc/stm32f7xx_hal.h:
 
@@ -284,3 +286,7 @@ C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_tim.h:
 C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_clock.h:
 
 C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_led.h:
+
+C:\Users\iysheng\workspace\chicken\uc-bsp/bsp_sdram.h:
+
+C:\Users\iysheng\workspace\chicken\hallib/main.h:
