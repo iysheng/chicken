@@ -157,7 +157,8 @@ int main(void)
     OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
 
     while (DEF_ON) {                                            /* Should Never Get Here.                               */
-        ;
+
+
     }
 }
 
@@ -198,6 +199,8 @@ static  void  AppTaskStart (void *p_arg)
     AppTaskCreate();                                            /* Create Application tasks                             */
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
+
+    	OSTaskDel((OS_TCB*)0,&err);
     	OSTimeDlyHMSM( 0u, 1u, 0u, 0u,
     	                       OS_OPT_TIME_HMSM_STRICT,
     	                      &err);
@@ -321,6 +324,7 @@ static  void  AppTaskObj0 (void  *p_arg)
 #endif
     	 if(tp_dev.sta!=0)
     	     {
+    		 printf("i get in.\r\n");
     	       tp_dev.sta&=0x1f;
     	       while(tp_dev.sta&0x01){
     	         upoint++;

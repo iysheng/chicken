@@ -84,7 +84,7 @@
 #define  TRACE_LEVEL_DBG                        2u
 #endif
 
-#define  APP_TRACE_LEVEL                        3u
+#define  APP_TRACE_LEVEL                        0u
 #define  APP_TRACE                              printf
 
 #define  APP_TRACE_INFO(x)               ((APP_TRACE_LEVEL >= TRACE_LEVEL_INFO)  ? (void)(APP_TRACE x) : (void)0)
