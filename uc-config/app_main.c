@@ -58,10 +58,8 @@ uint16_t raw_icekong[4];
 extern UART_HandleTypeDef UART_DEBUG;
 extern uint32_t ic_value;            //捕获的计数值
 extern uint8_t ic_state;              //捕获的状态值
-extern uint32_t POINT_COLOR;		//画笔颜色
-extern uint32_t BACK_COLOR;  	//背景色
 extern ADC_HandleTypeDef ICEKONG;
-extern uint16_t dma_adc_flag;
+//extern uint16_t dma_adc_flag;
 extern _touch_dev tp_dev;
 /*
 *********************************************************************************************************
@@ -83,12 +81,15 @@ static  OS_TCB       AppTaskStartTCB;
 static  CPU_STK      AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
 
                                                                 /* --------------- SEMAPHORE TASK TEST --------------- */
-static  OS_TCB       AppTaskObj0TCB;
-static  CPU_STK      AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE];
+OS_TCB       AppTaskObj0TCB;
+CPU_STK      AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 
-static  OS_TCB       AppTaskObj1TCB;
-static  CPU_STK      AppTaskObj1Stk[APP_CFG_TASK_OBJ_STK_SIZE];
-                                                                /* ------------ FLOATING POINT TEST TASK -------------- */
+OS_TCB       AppTaskObj1TCB;
+CPU_STK      AppTaskObj1Stk[APP_CFG_TASK_OBJ_STK_SIZE];
+
+OS_TCB       AppTaskObj2TCB;
+CPU_STK      AppTaskObj2Stk[APP_CFG_TASK_OBJ_STK_SIZE];
+
 
 /*
 *********************************************************************************************************
@@ -101,6 +102,7 @@ static  void  AppTaskCreate(void);
 
 static  void  AppTaskObj0  (void  *p_arg);
 static  void  AppTaskObj1  (void  *p_arg);
+static  void  AppTaskObj2  (void  *p_arg);
 
 /*
 *********************************************************************************************************
@@ -152,8 +154,6 @@ int main(void)
                   0u,
                  (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  &err);
-    //OSTaskDel((OS_TCB*)0,&err);
-   // OSTaskDel(&AppTaskStartTCB,&err);
     OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
 
     while (DEF_ON) {                                            /* Should Never Get Here.                               */
@@ -199,12 +199,7 @@ static  void  AppTaskStart (void *p_arg)
     AppTaskCreate();                                            /* Create Application tasks                             */
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-
     	OSTaskDel((OS_TCB*)0,&err);
-    	OSTimeDlyHMSM( 0u, 1u, 0u, 0u,
-    	                       OS_OPT_TIME_HMSM_STRICT,
-    	                      &err);
-    	;
     }
 }
 
@@ -227,7 +222,7 @@ static  void  AppTaskStart (void *p_arg)
 static  void  AppTaskCreate (void)
 {
     OS_ERR  os_err;
-                                                                /* ---------- CREATE KERNEL OBJECTS TEST TASK --------- */
+     /* ---------- CREATE KERNEL OBJECTS TEST TASK --------- */
     OSTaskCreate(&AppTaskObj0TCB,
                  "Kernel Objects Task 0",
                   AppTaskObj0,
@@ -241,7 +236,6 @@ static  void  AppTaskCreate (void)
                   0,
                  (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  &os_err);
-
     OSTaskCreate(&AppTaskObj1TCB,
                  "Kernel Objects Task 0",
                   AppTaskObj1,
@@ -249,6 +243,19 @@ static  void  AppTaskCreate (void)
                   APP_CFG_TASK_OBJ1_PRIO+1,
                  &AppTaskObj1Stk[0],
                   AppTaskObj1Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
+                  APP_CFG_TASK_OBJ_STK_SIZE,
+                  0u,
+                  0u,
+                  0,
+                 (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 &os_err);
+    OSTaskCreate(&AppTaskObj2TCB,
+                 "Kernel Objects Task 0",
+                  AppTaskObj2,
+                  0,
+                  APP_CFG_TASK_OBJ2_PRIO+1,
+                 &AppTaskObj2Stk[0],
+                  AppTaskObj2Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
                   APP_CFG_TASK_OBJ_STK_SIZE,
                   0u,
                   0u,
@@ -277,23 +284,21 @@ static  void  AppTaskObj0 (void  *p_arg)
 {
     OS_ERR  os_err;
     (void)p_arg;
-    static uint64_t hole_ic_value;//捕获的计数值
-    static uint8_t uline,upoint;
+    static uint8_t uline;
     static float ftemp;
     static uint32_t uitemp;
     static char rstr[64];
 
-    LTDC_Clear(WHITE);
-    BACK_COLOR=WHITE;
-    POINT_COLOR=RED;
-    APPOLO_RGB(0,0,gImage_xiong);
     HAL_ADC_Start_DMA(&ICEKONG,(uint32_t *)raw_icekong,IDAC_COUNT);
     while (DEF_TRUE) {
     	BSP_LED_Off(0);
-#if 0
-        APP_TRACE_INFO(("Object test task 0 running ....\r\n"));
-        if(dma_adc_flag<<7){
-            dma_adc_flag=0X00;
+    	OSTaskSemPend (
+    		        100,
+    				OS_OPT_PEND_BLOCKING,
+    				NULL,
+    				&os_err);
+    	if(os_err==OS_ERR_NONE)
+    	{
             while(uline<4){
             switch(uline)
             {
@@ -309,71 +314,79 @@ static  void  AppTaskObj0 (void  *p_arg)
             uline++;
             }
             uline=0;
-            }
-    	 if(ic_state>>7)
-    	    {
-    	      ic_state&=0x3f;
-    	      hole_ic_value=ic_state*(0xffffffff);
-    	      hole_ic_value+=ic_value;
-    	      ic_value=hole_ic_value/1000;
-    	      sprintf((char *)rstr,"PWM:%6dms...%9lldus",(int)ic_value,(long long int)hole_ic_value);
-    	      LCD_ShowString(120,50,strlen(rstr)*16,32,32,(uint8_t *)rstr);
-    	      printf("%s\r\n",rstr);
-    	      ic_state=0x00;
-    	    }
-#endif
-    	 if(tp_dev.sta!=0)
-    	     {
-    		 printf("i get in.\r\n");
-    	       tp_dev.sta&=0x1f;
-    	       while(tp_dev.sta&0x01){
-    	         upoint++;
-    	         tp_dev.sta>>=1;
-    	       }
-    	       for(tp_dev.sta=0;tp_dev.sta<upoint;tp_dev.sta++)
-    	       {
-    	       sprintf((char *)rstr,"%dtouchpoint,x=%3d,y=%3d",tp_dev.sta,(uint16_t)tp_dev.x[tp_dev.sta],(uint16_t)tp_dev.y[tp_dev.sta]);
-    	       if((tp_dev.x[tp_dev.sta]<800)&&(tp_dev.y[tp_dev.sta]<480))
-    	       {
-    	        //printf("%s\r\n",rstr);
-    	         LCD_ShowString(300,50+3*80,32*16,32,32,(uint8_t *)rstr);
-    	       }
-    	       }
-    	       upoint=0;
-    	       tp_dev.sta=0;
-    	     }
-        OSTimeDlyHMSM( 0u, 0u, 0u, 10u,
-                       OS_OPT_TIME_HMSM_STRICT,
-                      &os_err);
+        }
+    	APP_TRACE_INFO(("Object test task 0 running ....\r\n"));
     }
 }
-
-
-/*
-*********************************************************************************************************
-*                                          AppTaskObj1()
-*
-* Description : Test uC/OS-III objects.
-*
-* Argument(s) : p_arg is the argument passed to 'AppTaskObj1' by 'OSTaskCreate()'.
-*
-* Return(s)   : none
-*
-* Caller(s)   : This is a task
-*
-* Note(s)     : none.
-*********************************************************************************************************
-*/
 
 static  void  AppTaskObj1 (void  *p_arg)
 {
     OS_ERR       os_err;
     (void)p_arg;
+    static uint64_t hole_ic_value;//捕获的计数值
+    static char rstr[64];
+
     while (DEF_TRUE) {
-        BSP_LED_On(0);
-        OSTimeDlyHMSM( 0u, 10u, 0u, 0u,
-                       OS_OPT_TIME_HMSM_STRICT,
-                      &os_err);
+    	OSTaskSemPend (
+    		        100,
+    				OS_OPT_PEND_BLOCKING,
+    				NULL,
+    				&os_err);
+    	if(os_err==OS_ERR_NONE)
+    	{
+           	      ic_state&=0x3f;
+           	      hole_ic_value=ic_state*(0xffffffff);
+           	      hole_ic_value+=ic_value;
+           	      ic_value=hole_ic_value/1000;
+           	      sprintf((char *)rstr,"PWM:%6dms...%9lldus",(int)ic_value,(long long int)hole_ic_value);
+           	      LCD_ShowString(120,50,strlen(rstr)*16,32,32,(uint8_t *)rstr);
+           	      printf("%s\r\n",rstr);
+           	      ic_state=0x00;
+    	}
         APP_TRACE_INFO(("Object test task 1 running ....\r\n"));
+    }
+}
+
+static  void  AppTaskObj2 (void  *p_arg)
+{
+    OS_ERR       os_err;
+    (void)p_arg;
+    static char rstr[64];
+    static uint8_t upoint;
+
+    while (DEF_TRUE) {
+        OSTaskSemPend (100,
+            				OS_OPT_PEND_BLOCKING,
+            				NULL,
+            				&os_err);
+        if(os_err==OS_ERR_NONE)
+        {
+        BSP_LED_On(0);
+        FT5206_Scan();
+        if(tp_dev.sta!=0)
+           	     {
+           	       tp_dev.sta&=0x1f;
+           	       while(tp_dev.sta&0x01){
+           	         upoint++;
+           	         tp_dev.sta>>=1;
+           	       }
+           	       for(tp_dev.sta=0;tp_dev.sta<upoint;tp_dev.sta++)
+           	       {
+           	       sprintf((char *)rstr,"%dtouchpoint,x=%3d,y=%3d",tp_dev.sta,(uint16_t)tp_dev.x[tp_dev.sta],(uint16_t)tp_dev.y[tp_dev.sta]);
+           	       if((tp_dev.x[tp_dev.sta]<800)&&(tp_dev.y[tp_dev.sta]<480))
+           	       {
+           	        //printf("%s\r\n",rstr);
+           	         LCD_ShowString(300,50+3*80,32*16,32,32,(uint8_t *)rstr);
+           	       }
+           	       }
+           	       upoint=0;
+           	       tp_dev.sta=0;
+           	     }
+        }
+        else if(os_err==OS_ERR_TIMEOUT)
+        {
+        	printf("task3 time out.\r\n");
+        }
+        APP_TRACE_INFO(("Object test task 2 running ....\r\n"));
     }
 }

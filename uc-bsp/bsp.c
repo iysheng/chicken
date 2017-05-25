@@ -82,7 +82,8 @@ extern _touch_dev tp_dev;
 *                                       LOCAL GLOBAL VARIABLES
 *********************************************************************************************************
 */
-
+extern uint32_t POINT_COLOR;		//画笔颜色
+extern uint32_t BACK_COLOR;  	//背景色
 
 /*
 *********************************************************************************************************
@@ -116,6 +117,10 @@ void  BSP_Init (void)
 
     SDRAM_init();
     LCD_Init();
+    LTDC_Clear(WHITE);
+    BACK_COLOR=WHITE;
+    POINT_COLOR=RED;
+    APPOLO_RGB(0,0,gImage_xiong);
     tp_dev.init();
     TIM2_init();     //定时器2周期采样ADC的值
     TIM3_init();     //定时器3输出PWM供测试使用

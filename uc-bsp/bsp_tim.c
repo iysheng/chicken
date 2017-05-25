@@ -12,6 +12,7 @@ TIM_MasterConfigTypeDef iMasterConfig;
 TIM_OC_InitTypeDef iConfig;
 uint32_t ic_value;//捕获的计数值
 uint8_t ic_state;//捕获的状态值
+extern OS_TCB       AppTaskObj1TCB;
 
 void TIM2_init(void)
 {
@@ -145,12 +146,14 @@ void TIM5_IRQHandler(void){
 /*输入捕获中断的回调函数*/
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
+  static OS_ERR err;
   if(htim->Instance==TIM5)
   {
     switch(ic_state)
     {
     case 0x00:ic_state=0x40;ic_value=0x00;__HAL_TIM_DISABLE(htim);__HAL_TIM_SET_COUNTER(htim,0);__HAL_TIM_ENABLE(htim);break;//捕获第一个中断
-    case 0x40:ic_state|=0x80;ic_value=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);break;//捕获第二个中断，完成一次周期捕获
+    case 0x40:ic_state|=0x80;ic_value=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+    OSTaskSemPost(&AppTaskObj1TCB,OS_OPT_POST_NONE,&err);break;//捕获第二个中断，完成一次周期捕获
     default:break;
     }
   }
