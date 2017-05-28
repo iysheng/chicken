@@ -754,7 +754,7 @@ OS_SEM_CTR  OSSemPost (OS_SEM  *p_sem,
         p_sem->TS = ts;                                         /* Save timestamp in semaphore control block            */
 #endif
         CPU_CRITICAL_EXIT();
-       *p_err     = OS_ERR_NONE;
+       *p_err    = OS_ERR_NONE;
         OS_TRACE_SEM_POST_EXIT(*p_err);
         return (ctr);
     }
