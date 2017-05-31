@@ -261,7 +261,7 @@ static void AppTaskObj0(void *p_arg) {
 
 	HAL_ADC_Start_DMA(&ICEKONG, (uint32_t *) raw_icekong, IDAC_COUNT);
 	while (DEF_TRUE) {
-		BSP_LED_Off(0);
+		//BSP_LED_Off(0);
 		OSTaskSemPend(100,
 		OS_OPT_PEND_BLOCKING,
 		NULL, &os_err);
@@ -362,7 +362,6 @@ static void AppTaskObj2(void *p_arg) {
 		NULL, &os_err);
 
 		if (os_err == OS_ERR_NONE) {
-			BSP_LED_On(0);
 			FT5206_Scan();
 			if (tp_dev.sta != 0) {
 				 tp_dev.sta&=0x1f;

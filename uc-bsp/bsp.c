@@ -90,7 +90,21 @@ extern uint32_t BACK_COLOR;  	//背景色
 *                                      LOCAL FUNCTION PROTOTYPES
 *********************************************************************************************************
 */
+void EXTI_Init(void)
+{
+    GPIO_InitTypeDef GPIO_Initure;
 
+	__HAL_RCC_GPIOH_CLK_ENABLE();			//开启GPIOH时钟
+	GPIO_Initure.Pin = GPIO_PIN_2|GPIO_PIN_3;            //PH2 PH3
+	GPIO_Initure.Mode = GPIO_MODE_IT_FALLING;
+	GPIO_Initure.Pull = GPIO_PULLUP;          //上拉
+	GPIO_Initure.Speed = GPIO_SPEED_HIGH;     //高速
+	HAL_GPIO_Init(GPIOH, &GPIO_Initure);     //初始化
+	HAL_NVIC_EnableIRQ(EXTI2_IRQn);     //初始化按键中断,模拟边沿探测
+	HAL_NVIC_SetPriority(EXTI2_IRQn, 5, 1);    //设置优先级抢占优先级(3bit)为5,次优先级(0bit)为1
+	HAL_NVIC_EnableIRQ(EXTI3_IRQn);     //初始化按键中断,模拟边沿探测
+	HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 1);    //设置优先级抢占优先级(3bit)为5,次优先级(0bit)为1
+}
 
 /*
 *********************************************************************************************************
@@ -117,6 +131,7 @@ void  BSP_Init (void)
 
     SDRAM_init();
     LCD_Init();
+    EXTI_Init();
     LTDC_Clear(WHITE);
     BACK_COLOR=WHITE;
     POINT_COLOR=RED;
@@ -127,3 +142,29 @@ void  BSP_Init (void)
     TIM5_init();     //定时器5输入捕获计算频率
     CEKONG_init();
 }
+
+void EXTI2_IRQHandler(void)
+{
+	OSIntEnter();
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
+	OSIntExit();
+}
+
+void EXTI3_IRQHandler(void)
+{
+	OSIntEnter();
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
+	OSIntExit();
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	switch(GPIO_Pin)
+	{
+	case GPIO_PIN_2:BSP_LED_On(0);break;//PH2-KEY1-点亮led1-PB0
+	case GPIO_PIN_3:BSP_LED_Off(0);break;//PH3-KEY0-熄灭led1-PB0
+	default:break;
+	}
+}
+
+
