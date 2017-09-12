@@ -137,8 +137,9 @@ int main(void) {
 
 	CPU_IntDis(); /* Disable all Interrupts.                              */
 
-
+	BSP_Init(); /* Initialize BSP functions                             */
 	OSInit(&err); /* Init uC/OS-III.                                      */
+
 	App_OS_SetAllHooks();
 	MessQueue_Init ();
 
@@ -176,8 +177,10 @@ static void AppTaskStart(void *p_arg) {
 
 	(void) p_arg;
 
-	BSP_Init(); /* Initialize BSP functions                             */
 
+	__HAL_RCC_CRC_CLK_ENABLE()
+	  ;
+	  GUI_Init ();
 #if OS_CFG_STAT_TASK_EN > 0u
 	OSStatTaskCPUUsageInit(&err); /* Compute CPU capacity with no task running            */
 #endif
@@ -187,10 +190,15 @@ static void AppTaskStart(void *p_arg) {
 #endif
 
 	APP_TRACE_DBG(("Creating Application Tasks\n\r"));
-	AppTaskCreate(); /* Create Application tasks                             */
+	//printf("hello china");
+	uint8_t * haha = "hello china";
+	HAL_UART_Transmit(&UART_DEBUG, (uint8_t *)haha, 10, 0xFFFF);
+	GUI_DispStringAt ("iysheng@163.com", 200, 300);
+	AppTaskCreate(); /* Create Application tasks */
 
 	while (DEF_TRUE) { /* Task body, always written as an infinite loop.       */
-		OSTaskDel((OS_TCB*) 0, &err);
+		//OSTaskDel((OS_TCB*) 0, &err);
+	    OSTimeDlyHMSM(0,0,2,0,OS_OPT_TIME_DLY,&err);
 	}
 }
 
@@ -218,11 +226,13 @@ static void AppTaskCreate(void) {
 			AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
 			APP_CFG_TASK_OBJ_STK_SIZE, 0u, 0u, 0,
 			(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ), &os_err);
+
 	OSTaskCreate(&AppTaskObj1TCB, "Kernel Objects Task 1", AppTaskObj1, 0,
 	APP_CFG_TASK_OBJ1_PRIO, &AppTaskObj1Stk[0],
 			AppTaskObj1Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
 			APP_CFG_TASK_OBJ_STK_SIZE, 0u, 0u, 0,
 			(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ), &os_err);
+#if 0
 	OSTaskCreate(&AppTaskObj2TCB, "Kernel Objects Task 2", AppTaskObj2, 0,
 	APP_CFG_TASK_OBJ2_PRIO, &AppTaskObj2Stk[0],
 			AppTaskObj2Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
@@ -233,6 +243,7 @@ static void AppTaskCreate(void) {
 			AppTaskObj3Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
 			APP_CFG_TASK_OBJ_STK_SIZE, 0u, 0u, 0,
 			(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ), &os_err);
+#endif
 }
 
 /*
@@ -250,7 +261,80 @@ static void AppTaskCreate(void) {
  * Note(s)     : none.
  *********************************************************************************************************
  */
+/*
+*********************************************************************************************************
+*        函 数 名: AppTaskGUI
+*        功能说明: GUI任务0
+*        形    参：p_arg 是在创建该任务时传递的形参
+*        返 回 值: 无
+*   优 先 级：OS_CFG_PRIO_MAX - 6u
+*********************************************************************************************************
+*/
+//extern void MainTask(void);
+static void AppTaskObj0(void *p_arg)
+{
+    (void)p_arg;        /* 避免编译器告警 */
+    OS_ERR      p_err;
+    	  GUI_Init ();
+while (1)
+{
+    GUI_DispStringAt ("AppTaskObj0", 0, 0);
+    OSTimeDlyHMSM(0,0,2,0,OS_OPT_TIME_DLY,&p_err);
+//MainTask();
+}
+}
 
+/*
+*********************************************************************************************************
+*        函 数 名: AppTaskGUI
+*        功能说明: GUI任务1
+*        形    参：p_arg 是在创建该任务时传递的形参
+*        返 回 值: 无
+*   优 先 级：OS_CFG_PRIO_MAX - 5u
+*********************************************************************************************************
+*/
+//extern void Task_1(void);
+static void AppTaskObj1(void *p_arg)
+{
+    (void)p_arg;        /* 避免编译器告警 */
+    OS_ERR      p_err;
+     GUI_Init ();
+     static int32_t ii = 0;
+     static char * task1;
+while (1)
+{
+    //sprintf(task1,"AppTaskObj1--%d",ii++);
+    //GUI_DispStringAt ((const char *)task1, 200, 200);
+    GUI_GotoX(200);
+    GUI_GotoY(200);
+    GUI_DispDec(ii++,5);
+    OSTimeDlyHMSM(0,0,2,0,OS_OPT_TIME_DLY,&p_err);
+//Task_1();
+}
+}
+/*
+*********************************************************************************************************
+*        函 数 名: AppTaskGUI
+*        功能说明: GUI任务2
+*        形    参：p_arg 是在创建该任务时传递的形参
+*        返 回 值: 无
+*   优 先 级：OS_CFG_PRIO_MAX - 4u
+*********************************************************************************************************
+*/
+//extern void Task_2(void);
+static void AppTaskObj2(void *p_arg)
+{
+    (void)p_arg;        /* 避免编译器告警 */
+    OS_ERR      p_err;
+     GUI_Init ();
+while (1)
+{
+    OSTimeDlyHMSM(0,0,2,0,OS_OPT_TIME_DLY,&p_err);
+//Task_2();
+}
+}
+
+#if 0
 static void AppTaskObj0(void *p_arg) {
 	OS_ERR os_err;
 	(void) p_arg;
@@ -258,7 +342,6 @@ static void AppTaskObj0(void *p_arg) {
 	static float ftemp;
 	static uint32_t uitemp;
 	static char rstr[64];
-
 	HAL_ADC_Start_DMA(&ICEKONG, (uint32_t *) raw_icekong, IDAC_COUNT);
 	while (DEF_TRUE) {
 		//BSP_LED_Off(0);
@@ -290,9 +373,9 @@ static void AppTaskObj0(void *p_arg) {
 				default:
 					break;
 				}
-				LCD_ShowString(120, 130 + uline * 80, strlen(rstr) * 16, 32, 32,
-						(uint8_t *) rstr);
-				//printf("%s\r\n",rstr);
+				//LCD_ShowString(120, 130 + uline * 80, strlen(rstr) * 16, 32, 32,
+				//		(uint8_t *) rstr);
+				printf("%s\r\n",rstr);
 				uline++;
 			}
 			uline = 0;
@@ -322,8 +405,8 @@ static void AppTaskObj1(void *p_arg) {
 						*rpm_value = hole_ic_value / 1000;
 						sprintf((char *) rstr, "PWM:%6dms...%9lldus", (int)(*rpm_value),
 								(long long int) hole_ic_value);
-						LCD_ShowString(120, 50, strlen(rstr) * 16, 32, 32,
-								(uint8_t *) rstr);
+						//LCD_ShowString(120, 50, strlen(rstr) * 16, 32, 32,
+						//		(uint8_t *) rstr);
 						printf("task1 %s &msg_size is %d\r\n", rstr,(int)msg_size);
 						*rpm_value = 0x00;
 		}
@@ -406,7 +489,7 @@ static void AppTaskObj2(void *p_arg) {
 		 }*/
 	}
 }
-
+#endif
 static void AppTaskObj3(void *p_arg) {
 		OS_ERR os_err;
 		OS_MSG_SIZE msg_size;
@@ -423,11 +506,11 @@ static void AppTaskObj3(void *p_arg) {
 			{
 				sprintf((char *)rstr,"->num:%3dm_size is:%d.",(int)(*(uint8_t *)(key_value+10)),(int)msg_size);
 				printf("%s\r\n",rstr);
-				LCD_ShowString(300,50+2*80,32*16,32,32,(uint8_t *)rstr);
+				//LCD_ShowString(300,50+2*80,32*16,32,32,(uint8_t *)rstr);
 				for(int i=0;i<*(uint8_t *)(key_value+10);i++)
 				{
 					sprintf((char *)rstr,"point%dx is %3d,y is %3d.",(int)(*(uint8_t *)(key_value+10)),(int)(*(uint16_t *)(key_value+i)),(int)(*(uint16_t *)(key_value+5+i)));
-					LCD_ShowString(300,50+3*80,32*16,32,32,(uint8_t *)rstr);
+					//LCD_ShowString(300,50+3*80,32*16,32,32,(uint8_t *)rstr);
 					printf("%s\r\n",rstr);
 				}
 			}

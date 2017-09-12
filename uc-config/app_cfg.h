@@ -49,11 +49,11 @@
 *********************************************************************************************************
 */
 
-#define  APP_CFG_TASK_START_PRIO                2u
-#define  APP_CFG_TASK_OBJ0_PRIO                  3u
-#define  APP_CFG_TASK_OBJ1_PRIO                  4u
-#define  APP_CFG_TASK_OBJ2_PRIO                  5u
-#define  APP_CFG_TASK_OBJ3_PRIO                  6u
+#define  APP_CFG_TASK_START_PRIO                7u
+#define  APP_CFG_TASK_OBJ0_PRIO                  13u
+#define  APP_CFG_TASK_OBJ1_PRIO                  14u
+#define  APP_CFG_TASK_OBJ2_PRIO                  15u
+#define  APP_CFG_TASK_OBJ3_PRIO                  16u
 
 /*
 *********************************************************************************************************
@@ -62,9 +62,9 @@
 *********************************************************************************************************
 */
 
-#define  APP_CFG_TASK_START_STK_SIZE            256u
+#define  APP_CFG_TASK_START_STK_SIZE            512u
 #define  APP_CFG_TASK_EQ_STK_SIZE               512u
-#define  APP_CFG_TASK_OBJ_STK_SIZE              256u
+#define  APP_CFG_TASK_OBJ_STK_SIZE              512u
 
 
 /*

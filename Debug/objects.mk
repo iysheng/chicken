@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS :=
+LIBS := -lSTemWin532_CM7_OS_GCC -larm_cortexM7lfdp_math
 

@@ -8,6 +8,7 @@ C_SRCS += \
 ../hallib/Src/stm32f7xx_hal_adc.c \
 ../hallib/Src/stm32f7xx_hal_cortex.c \
 ../hallib/Src/stm32f7xx_hal_dma.c \
+../hallib/Src/stm32f7xx_hal_dma2d.c \
 ../hallib/Src/stm32f7xx_hal_gpio.c \
 ../hallib/Src/stm32f7xx_hal_ltdc.c \
 ../hallib/Src/stm32f7xx_hal_pwr.c \
@@ -25,6 +26,7 @@ OBJS += \
 ./hallib/Src/stm32f7xx_hal_adc.o \
 ./hallib/Src/stm32f7xx_hal_cortex.o \
 ./hallib/Src/stm32f7xx_hal_dma.o \
+./hallib/Src/stm32f7xx_hal_dma2d.o \
 ./hallib/Src/stm32f7xx_hal_gpio.o \
 ./hallib/Src/stm32f7xx_hal_ltdc.o \
 ./hallib/Src/stm32f7xx_hal_pwr.o \
@@ -42,6 +44,7 @@ C_DEPS += \
 ./hallib/Src/stm32f7xx_hal_adc.d \
 ./hallib/Src/stm32f7xx_hal_cortex.d \
 ./hallib/Src/stm32f7xx_hal_dma.d \
+./hallib/Src/stm32f7xx_hal_dma2d.d \
 ./hallib/Src/stm32f7xx_hal_gpio.d \
 ./hallib/Src/stm32f7xx_hal_ltdc.d \
 ./hallib/Src/stm32f7xx_hal_pwr.d \
@@ -59,7 +62,7 @@ C_DEPS += \
 hallib/Src/%.o: ../hallib/Src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM GNU C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wall  -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -I"C:\Users\iysheng\workspace\chicken\core" -I"C:\Users\iysheng\workspace\chicken\hallib" -I"C:\Users\iysheng\workspace\chicken\hallib\Inc" -I"C:\Users\iysheng\workspace\chicken\hallib\Inc\Legacy" -I"C:\Users\iysheng\workspace\chicken\uc-bsp" -I"C:\Users\iysheng\workspace\chicken\uc-config" -I"C:\Users\iysheng\workspace\chicken\uC-CPU\ARM-Cortex-M4\GNU" -I"C:\Users\iysheng\workspace\chicken\uC-CPU" -I"C:\Users\iysheng\workspace\chicken\uC-LIB" -I"C:\Users\iysheng\workspace\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU" -I"C:\Users\iysheng\workspace\chicken\uCOS-III\Source" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wall  -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -D__FPU_PRESENT=1 -DARM_MATH_CM7 -DARM_MATH_ROUNDING -DARM_MATH_MATRIX_CHECK -I"D:\Oxygen\chicken\core" -I"D:\Oxygen\chicken\hallib" -I"D:\Oxygen\chicken\hallib\Inc" -I"D:\Oxygen\chicken\hallib\Inc\Legacy" -I"D:\Oxygen\chicken\uc-bsp" -I"D:\Oxygen\chicken\uc-config" -I"D:\Oxygen\chicken\uC-CPU\ARM-Cortex-M4\GNU" -I"D:\Oxygen\chicken\uC-CPU" -I"D:\Oxygen\chicken\uC-LIB" -I"D:\Oxygen\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU" -I"D:\Oxygen\chicken\uCOS-III\Source" -I"D:\Oxygen\chicken\Config" -I"D:\Oxygen\chicken\GUI\inc" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -20,6 +20,8 @@ RM := rm -rf
 -include hallib/Src/subdir.mk
 -include hallib/subdir.mk
 -include core/subdir.mk
+-include GUI/Core/subdir.mk
+-include Config/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -52,7 +54,7 @@ all: chicken.elf secondary-outputs
 chicken.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM GNU C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wall  -g3 -T "C:\Users\iysheng\workspace\chicken\STM32F767ZITx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"chicken.map" -specs=nosys.specs -o "chicken.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wall  -g3 -T "D:\Oxygen\chicken\STM32F767ZITx_FLASH.ld" -Xlinker --gc-sections -L"D:\Oxygen\chicken\GUI\Core" -L"D:\Oxygen\chicken\core" -Wl,-Map,"chicken.map" -u _printf_float -u _scanf_float -specs=nosys.specs -o "chicken.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -76,6 +78,5 @@ clean:
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)
 
 .PHONY: all clean dependents
-.SECONDARY:
 
 -include ../makefile.targets

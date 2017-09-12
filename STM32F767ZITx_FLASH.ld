@@ -43,7 +43,7 @@ MEMORY
 {
 FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K
 RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 512K
-SDRAM (xrw)     :ORIGIN = 0xc0000000, LENGTH = 32M
+SDRAM (xrw)     :ORIGIN = 0xc0F00000, LENGTH = 16M
 }
 
 /* Define output sections */
@@ -126,7 +126,13 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-  
+. = ALIGN(4);
+.bss_emwin :
+  {
+  ./Config/GUIConf.o(COMMON);
+  } > SDRAM
+
+    
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -153,11 +159,6 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
   } >RAM
-
-.sdram_block 0xC0000000 :
-  {
-  *(.sdram_section);
-  } > SDRAM
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
