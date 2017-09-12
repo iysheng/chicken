@@ -10,7 +10,7 @@
 TIM_HandleTypeDef ITIM2,ITIM3,ITIM5;
 TIM_MasterConfigTypeDef iMasterConfig;
 TIM_OC_InitTypeDef iConfig;
-uint32_t ic_value[2];//捕获的计数值
+int32_t ic_value[2];//捕获的计数值
 extern OS_Q RPM_Q;
 extern OS_TCB      AppTaskObj1TCB;
 

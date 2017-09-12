@@ -79,7 +79,7 @@ extern _touch_dev tp_dev;
  */
 extern uint32_t POINT_COLOR;		//画笔颜色
 extern uint32_t BACK_COLOR;  	//背景色
-
+struct rgb_parameter m19;
 /*
  *********************************************************************************************************
  *                                      LOCAL FUNCTION PROTOTYPES
@@ -126,7 +126,6 @@ BSP_Init (void)
   BSP_LED_Init (); /* Init LEDs.                                           */
   BSP_UART_Init ();
   SDRAM_init ();
-  struct rgb_parameter m19;
   m19.hbp = 46;
   m19.vbp = 23;
   m19.hfp = 210;
@@ -140,7 +139,7 @@ BSP_Init (void)
   //BACK_COLOR=WHITE;
   //POINT_COLOR=RED;
   //APPOLO_RGB(0,0,gImage_xiong);
-  //tp_dev.init ();
+  tp_dev.init ();
   TIM2_init ();     //定时器2周期采样ADC的值
   TIM3_init ();     //定时器3输出PWM供测试使用
   TIM5_init ();     //定时器5输入捕获计算频率

@@ -78,9 +78,8 @@ hallib/stm32f7xx_hal_msp.o: ../hallib/stm32f7xx_hal_msp.c \
  D:\Oxygen\chicken\uC-LIB/lib_ascii.h D:\Oxygen\chicken\uc-bsp/bsp_tim.h \
  D:\Oxygen\chicken\uc-bsp/bsp_clock.h D:\Oxygen\chicken\uc-bsp/bsp_led.h \
  D:\Oxygen\chicken\uc-bsp/bsp_sdram.h D:\Oxygen\chicken\hallib/main.h \
- D:\Oxygen\chicken\uc-bsp/bsp_rgb.h D:\Oxygen\chicken\uc-bsp/xiong.h \
- D:\Oxygen\chicken\uc-bsp/bsp_adc.h D:\Oxygen\chicken\uc-bsp/bsp_touch.h \
- D:\Oxygen\chicken\GUI\inc/GUI.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_rgb.h D:\Oxygen\chicken\uc-bsp/bsp_adc.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_touch.h D:\Oxygen\chicken\GUI\inc/GUI.h \
  D:\Oxygen\chicken\GUI\inc/GUI_ConfDefaults.h \
  D:\Oxygen\chicken\Config/GUIConf.h D:\Oxygen\chicken\GUI\inc/GUI_Type.h \
  D:\Oxygen\chicken\GUI\inc/LCD.h D:\Oxygen\chicken\GUI\inc/Global.h \
@@ -279,8 +278,6 @@ D:\Oxygen\chicken\uc-bsp/bsp_sdram.h:
 D:\Oxygen\chicken\hallib/main.h:
 
 D:\Oxygen\chicken\uc-bsp/bsp_rgb.h:
-
-D:\Oxygen\chicken\uc-bsp/xiong.h:
 
 D:\Oxygen\chicken\uc-bsp/bsp_adc.h:
 
