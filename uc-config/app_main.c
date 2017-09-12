@@ -397,8 +397,6 @@ AppTaskObj0 (void *p_arg)
 		default:
 		  break;
 		}
-	      //LCD_ShowString(120, 130 + uline * 80, strlen(rstr) * 16, 32, 32,
-	      //		(uint8_t *) rstr);
 	      GUI_DispStringAt ((const char *) rstr, 400, uline * 100);
 	      printf ("%s\r\n", rstr);
 	      uline++;
@@ -434,13 +432,13 @@ AppTaskObj1 (void *p_arg)
 	  //sprintf ((char *) rstr, "PWM:%6dms...%6lldus", (int) (*rpm_value),
 		//   (long long int) hole_ic_value);
 	  //int a=(int) (*rpm_value);
-	  //sprintf ((char *) rstr, "PWM:%dms", a);
+	  sprintf ((char *) rstr, "PWM:%dms", (int) (*rpm_value));
 	  //LCD_ShowString(120, 50, strlen(rstr) * 16, 32, 32,
 	  //		(uint8_t *) rstr);
 	  GUI_GotoXY(400,400);
-	  int a=(int) (*rpm_value);
-	  GUI_DispDec(a,5);
-	  //GUI_DispStringAt ((const char *) rstr, 400, 400);
+	  //int a=(int) (*rpm_value);
+	  //GUI_DispDec(a,5);
+	  GUI_DispStringAt ((const char *) rstr, 400, 400);
 	  //GUI_DispStringAt ("yangyongsheng", 400, 400);
 	  printf ("task1 %s &msg_size is %d\r\n", rstr, (int) msg_size);
 	  //*rpm_value = 0x00;
