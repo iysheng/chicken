@@ -46,6 +46,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
     GPIO_Initure.Pin=GPIO_PIN_9; 
     GPIO_Initure.Alternate=GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOA,&GPIO_Initure);
   }
 }
 

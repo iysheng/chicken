@@ -45,8 +45,6 @@ RGB_Init (struct rgb_parameter *mode)
   ret = HAL_RCCEx_PeriphCLKConfig (&PeriphClkIniture);
   if (HAL_OK != ret)
     goto fail;
-  //LTDC_HandleTypeDef LTDC_Handler;	    //LTDC句柄
-  //memset(&LTDC_Handler,0,sizeof(LTDC_Handler));
   LTDC_Handler.Instance = LTDC;
   LTDC_Handler.Init.HSPolarity = LTDC_HSPOLARITY_AL;         //水平同步极性
   LTDC_Handler.Init.VSPolarity = LTDC_VSPOLARITY_AL;         //垂直同步极性

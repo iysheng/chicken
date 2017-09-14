@@ -71,6 +71,8 @@
 * @{
 */
 
+extern struct rgb_parameter m19;
+
 #undef  LCD_SWAP_XY
 #undef  LCD_MIRROR_Y
 
@@ -81,8 +83,8 @@
 
 #define LCD_SWAP_RB  1
 
-#define XSIZE_PHYS 800
-#define YSIZE_PHYS 480
+#define XSIZE_PHYS m19.width
+#define YSIZE_PHYS m19.height
 
 #define NUM_BUFFERS  3 /* Number of multiple buffers to be used */
 #define NUM_VSCREENS 1 /* Number of virtual screens to be used */
@@ -99,7 +101,6 @@
 #if (GUI_NUM_LAYERS > 1)
   #define COLOR_CONVERSION_1 GUICC_M1555I
   #define DISPLAY_DRIVER_1   GUIDRV_LIN_16
-
 #endif
 
 #ifndef   XSIZE_PHYS
@@ -380,6 +381,7 @@ int LCD_X_DisplayDriver(unsigned LayerIndex, unsigned Cmd, void * pData)
   switch (Cmd)
   {
   case LCD_X_INITCONTROLLER:
+    //RGB_Init (&m19);
     LCD_LL_LayerInit(LayerIndex);
     break;
 
@@ -498,11 +500,6 @@ static void LCD_LL_LayerInit(U32 LayerIndex)
   }
 }
 
-/**
-  * @brief  Initialize the LCD Controller.
-  * @param  LayerIndex : layer Index.
-  * @retval None
-  */
 //LCD底层驱动,LTDC中断设置，DMA2D初始化
 static void LCD_LL_Init(void)
 {
@@ -510,7 +507,6 @@ static void LCD_LL_Init(void)
     HAL_NVIC_SetPriority(LTDC_IRQn,1,1);
     HAL_NVIC_EnableIRQ(LTDC_IRQn);
     HAL_LTDC_ProgramLineEvent(&LTDC_Handler,0);//开启LTDC的行中断
-
     //DMA2D默认设置
     DMA2D_Handler.Instance=DMA2D;
     DMA2D_Handler.Init.Mode=DMA2D_R2M;          //内存到存储器模式

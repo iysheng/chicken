@@ -69,6 +69,7 @@ typedef struct
 LCD_LayerPropTypedef;
 int  GUI_TOUCH_X_MeasureX(void);
 int  GUI_TOUCH_X_MeasureY (void);
+
 #endif /* LCDCONF_H */
 
 /*************************** End of file ****************************/

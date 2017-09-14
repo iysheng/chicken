@@ -11,6 +11,7 @@ C_SRCS += \
 ../hallib/Src/stm32f7xx_hal_dma2d.c \
 ../hallib/Src/stm32f7xx_hal_gpio.c \
 ../hallib/Src/stm32f7xx_hal_ltdc.c \
+../hallib/Src/stm32f7xx_hal_nand.c \
 ../hallib/Src/stm32f7xx_hal_pwr.c \
 ../hallib/Src/stm32f7xx_hal_pwr_ex.c \
 ../hallib/Src/stm32f7xx_hal_rcc.c \
@@ -29,6 +30,7 @@ OBJS += \
 ./hallib/Src/stm32f7xx_hal_dma2d.o \
 ./hallib/Src/stm32f7xx_hal_gpio.o \
 ./hallib/Src/stm32f7xx_hal_ltdc.o \
+./hallib/Src/stm32f7xx_hal_nand.o \
 ./hallib/Src/stm32f7xx_hal_pwr.o \
 ./hallib/Src/stm32f7xx_hal_pwr_ex.o \
 ./hallib/Src/stm32f7xx_hal_rcc.o \
@@ -47,6 +49,7 @@ C_DEPS += \
 ./hallib/Src/stm32f7xx_hal_dma2d.d \
 ./hallib/Src/stm32f7xx_hal_gpio.d \
 ./hallib/Src/stm32f7xx_hal_ltdc.d \
+./hallib/Src/stm32f7xx_hal_nand.d \
 ./hallib/Src/stm32f7xx_hal_pwr.d \
 ./hallib/Src/stm32f7xx_hal_pwr_ex.d \
 ./hallib/Src/stm32f7xx_hal_rcc.d \

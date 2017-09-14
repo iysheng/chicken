@@ -79,6 +79,7 @@ extern  "C" {                                  /* See Note #1.                  
 #include  "bsp_rgb.h"
 #include  "bsp_adc.h"
 #include  "bsp_touch.h"
+#include  "bsp_nand.h"
 /*
 *********************************************************************************************************
 *                                               CONSTANTS
