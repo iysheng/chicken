@@ -19,6 +19,9 @@ C_DEPS :=
 SUBDIRS := \
 Config \
 GUI/Core \
+STM32_USB_Host_Library/Class/MSC/Src \
+STM32_USB_Host_Library/Core/Inc \
+STM32_USB_Host_Library/Core/Src \
 core \
 hallib/Src \
 hallib \

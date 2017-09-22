@@ -15,5 +15,6 @@
 #include "WM.h"
 #include "FRAMEWIN.h"
 #include <os.h>
+#include "string.h"
 
 #endif /* HALLIB_MAIN_H_ */

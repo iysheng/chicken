@@ -20,6 +20,9 @@ RM := rm -rf
 -include hallib/Src/subdir.mk
 -include hallib/subdir.mk
 -include core/subdir.mk
+-include STM32_USB_Host_Library/Core/Src/subdir.mk
+-include STM32_USB_Host_Library/Core/Inc/subdir.mk
+-include STM32_USB_Host_Library/Class/MSC/Src/subdir.mk
 -include GUI/Core/subdir.mk
 -include Config/subdir.mk
 -include subdir.mk

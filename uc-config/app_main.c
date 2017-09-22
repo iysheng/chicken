@@ -54,11 +54,12 @@
 
 uint16_t raw_icekong[4];
 
-extern UART_HandleTypeDef UART_DEBUG;
-extern uint32_t ic_value[2];            //捕获的计数值
 extern ADC_HandleTypeDef ICEKONG;
 extern _touch_dev tp_dev;
 extern struct rgb_parameter m19;
+extern SD_HandleTypeDef SDCARD_Handler;             //SD卡句柄
+extern USBH_ClassTypeDef  USBH_msc;
+USBH_HandleTypeDef  USB_Host;
 
 /*
  *********************************************************************************************************
@@ -91,6 +92,9 @@ CPU_STK AppTaskObj2Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 OS_TCB AppTaskObj3TCB;
 CPU_STK AppTaskObj3Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 
+OS_TCB AppTaskObj4TCB;
+CPU_STK AppTaskObj4Stk[APP_CFG_TASK_OBJ_STK_SIZE];
+
 /*
  *********************************************************************************************************
  *                                         FUNCTION PROTOTYPES
@@ -110,6 +114,8 @@ static void
 AppTaskObj2 (void *p_arg);
 static void
 AppTaskObj3 (void *p_arg);
+static void
+AppTaskObj4 (void *p_arg);
 
 static void
 MessQueue_Init (void);
@@ -183,6 +189,39 @@ main (void)
  *                  used.  The compiler should not generate any code for this statement.
  *********************************************************************************************************
  */
+static uint8_t
+SD_ShowCardInfo ()
+{
+  HAL_StatusTypeDef ret;
+  HAL_SD_CardInfoTypeDef cardInfo;
+  ret = HAL_SD_GetCardInfo (&SDCARD_Handler, &cardInfo);
+  switch (cardInfo.CardType)
+    {
+    case CARD_SDSC:
+      printf ("Card Type:CARD_SDSC\r\n");
+      break;
+    case CARD_SDHC_SDXC:
+      printf ("Card Type:CARD_SDHC_SDXC\r\n");
+      break;
+    case CARD_SECURED:
+      printf ("Card Type:CARD_SECURED\r\n");
+      break;
+    default:
+      printf ("Unknown Card Type\r\n");
+      break;
+    }
+  //printf ("Card RCA:%x\r\n", (unsigned int) cardInfo.RelCardAdd);        //卡相对地址
+  printf ("Card Capacity:%u MB\r\n",
+	  (unsigned int) (cardInfo.BlockNbr * cardInfo.BlockSize) >> 20);//显示容量
+  //printf ("Card BlockNbr:%u\r\n", (unsigned int) cardInfo.BlockNbr);
+  //printf ("Card BlockSize:%u\r\n", (unsigned int) cardInfo.BlockSize);//显示块大小
+  return ret;
+}
+
+void usbh_pUsrFunc(USBH_HandleTypeDef *phost, uint8_t id)
+   {
+  printf("hello usbh_pUsrFunc-----id:%u----->\r\n",(unsigned int)id);
+    }
 
 static void
 AppTaskStart (void *p_arg)
@@ -192,16 +231,6 @@ AppTaskStart (void *p_arg)
   (void) p_arg;
   BSP_Init (); /* Initialize BSP functions                             */
   RGB_Init (&m19);
-  __HAL_RCC_CRC_CLK_ENABLE()
-  ;
-  GUI_Init ();
-  GUI_SetBkColor(BK_HY_COLOR);
-  GUI_Clear();
-  GUI_CURSOR_Show();
-  GUI_CURSOR_Select(&GUI_CursorCrossL);
-  GUI_PID_STATE touchState;
-  GUI_TOUCH_Calibrate(GUI_COORD_X,0,m19.width,0,m19.width-1);
-  GUI_TOUCH_Calibrate(GUI_COORD_Y,0,m19.height,0,m19.height-1);
 #if OS_CFG_STAT_TASK_EN > 0u
   OSStatTaskCPUUsageInit (&err); /* Compute CPU capacity with no task running            */
 #endif
@@ -211,23 +240,12 @@ AppTaskStart (void *p_arg)
 #endif
 
   APP_TRACE_DBG(("Creating Application Tasks\n\r"));
-  GUI_DispStringAt ("iysheng@163.com", 100, 100);
   AppTaskCreate (); /* Create Application tasks */
-  char nand_mode[32];
-  uint32_t nand_id;
+
   while (DEF_TRUE)
     { /* Task body, always written as an infinite loop.       */
-      //OSTaskDel ((OS_TCB*) 0, &err);
-      GUI_TOUCH_GetState(&touchState);
-            GUI_GotoXY(0,250);
-            GUI_DispString("x:");
-            GUI_DispDec((touchState.x)++,4);
-            GUI_DispString(" y:");
-            GUI_DispDec(touchState.y,4);
-            nand_id=NAND_ReadID();
-      sprintf(nand_mode,"%x",(unsigned int)nand_id);
-      printf("nand_mode is %s",nand_mode);
-      OSTimeDlyHMSM (0, 0, 2, 0, OS_OPT_TIME_DLY, &err);
+      OSTaskDel ((OS_TCB*) 0, &err);
+      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &err);
     }
 }
 
@@ -281,6 +299,13 @@ AppTaskCreate (void)
 		APP_CFG_TASK_OBJ_STK_SIZE,
 		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
 		&os_err);
+  OSTaskCreate (&AppTaskObj4TCB, "Kernel Objects Task 4", AppTaskObj4, 0,
+    APP_CFG_TASK_OBJ4_PRIO,
+  		&AppTaskObj4Stk[0],
+  		AppTaskObj4Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
+  		APP_CFG_TASK_OBJ_STK_SIZE,
+  		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
+  		&os_err);
 }
 
 /*
@@ -371,9 +396,9 @@ AppTaskObj1 (void *p_arg)
     {
       rpm_value = (int32_t *) OSQPend (&RPM_Q, 1000,
       OS_OPT_PEND_BLOCKING,
-					&msg_size,
-					NULL,
-					&os_err);
+				       &msg_size,
+				       NULL,
+				       &os_err);
       if (os_err == OS_ERR_NONE)
 	{
 	  (*rpm_value) &= ~(3 << 30);
@@ -381,8 +406,8 @@ AppTaskObj1 (void *p_arg)
 	  hole_ic_value += *(rpm_value + 1);
 	  *rpm_value = hole_ic_value / 1000;
 	  //sprintf ((char *) rstr, "PWM:%6dms...%6lldus", (int) (*rpm_value),
-		//   (long long int) hole_ic_value);
-	  snprintf ((char *) rstr, 15,"PWM:%dms", (int) (*rpm_value));
+	  //   (long long int) hole_ic_value);
+	  snprintf ((char *) rstr, 15, "PWM:%dms", (int) (*rpm_value));
 	  GUI_DispStringAt ((const char *) rstr, 400, 400);
 	  printf ("task1 %s &msg_size is %d\r\n", rstr, (int) msg_size);
 	  //*rpm_value = 0x00;
@@ -405,7 +430,7 @@ AppTaskObj2 (void *p_arg)
 
       if (os_err == OS_ERR_NONE)
 	{
-	  GUI_TOUCH_Exec();
+	  GUI_TOUCH_Exec ();
 	  FT5206_Scan ();
 	  if (tp_dev.sta != 0)
 	    {
@@ -459,6 +484,45 @@ AppTaskObj3 (void *p_arg)
     }
 }
 
+static void
+AppTaskObj4 (void *p_arg)
+{
+  OS_ERR os_err;
+  (void) p_arg;
+  static char rstr[64];
+  char nand_mode[32];
+    uint32_t nand_id;
+  __HAL_RCC_CRC_CLK_ENABLE()
+    ;
+    GUI_Init ();
+    USBH_Init(&USB_Host,&usbh_pUsrFunc,USB_OTG_FS_CORE_ID);
+    USBH_RegisterClass(&USB_Host,&USBH_msc);
+    USBH_Start(&USB_Host);
+    GUI_SetBkColor (BK_HY_COLOR);
+    GUI_Clear ();
+    GUI_CURSOR_Show ();
+    GUI_CURSOR_Select (&GUI_CursorCrossL);
+    GUI_PID_STATE touchState;
+    GUI_TOUCH_Calibrate (GUI_COORD_X, 0, m19.width, 0, m19.width - 1);
+    GUI_TOUCH_Calibrate (GUI_COORD_Y, 0, m19.height, 0, m19.height - 1);
+    GUI_DispStringAt ("iysheng@163.com", 100, 100);
+    while (DEF_TRUE)
+      {
+	GUI_TOUCH_GetState (&touchState);
+	      GUI_GotoXY (0, 250);
+	      GUI_DispString ("x:");
+	      GUI_DispDec ((touchState.x)++, 4);
+	      GUI_DispString (" y:");
+	      GUI_DispDec (touchState.y, 4);
+	      nand_id = NAND_ReadID ();
+	      sprintf (nand_mode, "%x", (unsigned int) nand_id);
+	      printf ("nand_mode is %s.\r\n", nand_mode);
+	      SD_ShowCardInfo ();
+	      USBH_Process(&USB_Host);
+	      for(nand_id=0;nand_id++;nand_id<0xfffff);
+	      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &os_err);
+      }
+}
 void
 MessQueue_Init (void)
 {

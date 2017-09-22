@@ -97,6 +97,14 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c D:\Oxygen\chicken\uC-CPU/cpu_core.h \
  D:\Oxygen\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h \
  D:\Oxygen\chicken\uCOS-III\Source/os_trace.h ../uc-bsp/bsp_rgb.h \
  ../uc-bsp/bsp_adc.h ../uc-bsp/bsp_touch.h ../uc-bsp/bsp_nand.h \
+ ../uc-bsp/bsp_sdcard.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h \
  ../uc-bsp/bsp_os.h
 
 D:\Oxygen\chicken\uC-CPU/cpu_core.h:
@@ -336,5 +344,21 @@ D:\Oxygen\chicken\uCOS-III\Source/os_trace.h:
 ../uc-bsp/bsp_touch.h:
 
 ../uc-bsp/bsp_nand.h:
+
+../uc-bsp/bsp_sdcard.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h:
 
 ../uc-bsp/bsp_os.h:

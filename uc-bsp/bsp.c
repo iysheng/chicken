@@ -136,6 +136,7 @@ BSP_Init (void)
   EXTI_Init ();
   tp_dev.init ();
   NAND_Init();
+  SD_Init();
   TIM2_init ();     //定时器2周期采样ADC的值
   TIM3_init ();     //定时器3输出PWM供测试使用
   TIM5_init ();     //定时器5输入捕获计算频率

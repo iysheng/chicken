@@ -89,6 +89,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/uCOS-III/Source}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/Config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/GUI/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/STM32_USB_Host_Library/Class/MSC/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/STM32_USB_Host_Library/Core/Inc}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1949366262" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -107,8 +109,8 @@
 									<listOptionValue builtIn="false" value="STemWin532_CM7_OS_GCC"/>
 									<listOptionValue builtIn="false" value="arm_cortexM7lfdp_math"/>
 								</option>
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.useprintffloat.1655384445" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.useprintffloat" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usescanffloat.197853873" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usescanffloat" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.useprintffloat.1655384445" name="Use float with nano printf (-u _printf_float)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.useprintffloat" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usescanffloat.197853873" name="Use float with nano scanf (-u _scanf_float)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usescanffloat" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.1569033732" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -131,6 +133,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1371796378.1736167510" name="usbh_def.h" rcbsApplicability="disable" resourcePath="STM32_USB_Host_Library/Core/Inc/usbh_def.h" toolsToInvoke=""/>
 					<folderInfo id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1371796378.1561196728" name="/" resourcePath="GUI">
 						<toolChain id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.elf.debug.264694707" name="Cross ARM GCC" superClass="ilg.gnuarmeclipse.managedbuild.cross.toolchain.elf.debug" unusedChildren="">
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level.320446663.884182660" name="Optimization Level" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level.320446663"/>
@@ -177,6 +180,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/uCOS-III/Source}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/Config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/GUI/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/STM32_USB_Host_Library/Class/MSC/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/chicken/STM32_USB_Host_Library/Core/Inc}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1796603534" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>

@@ -80,6 +80,14 @@ hallib/stm32f7xx_hal_msp.o: ../hallib/stm32f7xx_hal_msp.c \
  D:\Oxygen\chicken\uc-bsp/bsp_sdram.h D:\Oxygen\chicken\hallib/main.h \
  D:\Oxygen\chicken\uc-bsp/bsp_rgb.h D:\Oxygen\chicken\uc-bsp/bsp_adc.h \
  D:\Oxygen\chicken\uc-bsp/bsp_touch.h D:\Oxygen\chicken\uc-bsp/bsp_nand.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_sdcard.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h \
  D:\Oxygen\chicken\GUI\inc/GUI.h \
  D:\Oxygen\chicken\GUI\inc/GUI_ConfDefaults.h \
  D:\Oxygen\chicken\Config/GUIConf.h D:\Oxygen\chicken\GUI\inc/GUI_Type.h \
@@ -285,6 +293,22 @@ D:\Oxygen\chicken\uc-bsp/bsp_adc.h:
 D:\Oxygen\chicken\uc-bsp/bsp_touch.h:
 
 D:\Oxygen\chicken\uc-bsp/bsp_nand.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_sdcard.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h:
 
 D:\Oxygen\chicken\GUI\inc/GUI.h:
 
