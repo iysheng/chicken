@@ -19,6 +19,14 @@ C_DEPS :=
 SUBDIRS := \
 Config \
 GUI/Core \
+LWIP/LAN8720 \
+LWIP/arch \
+LWIP/lwip-1.4.1/src/api \
+LWIP/lwip-1.4.1/src/core \
+LWIP/lwip-1.4.1/src/core/ipv4 \
+LWIP/lwip-1.4.1/src/netif \
+LWIP/lwip_app/lwip_comm \
+LWIP/lwip_app/tcp_client_demo \
 STM32_USB_Host_Library/Class/MSC/Src \
 STM32_USB_Host_Library/Core/Inc \
 STM32_USB_Host_Library/Core/Src \

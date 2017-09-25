@@ -107,7 +107,29 @@ uc-config/app_main.o: ../uc-config/app_main.c \
  D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h \
  D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
  D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h \
- D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_rtc.h D:\Oxygen\chicken\uc-bsp/bsp_net.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/netif.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/opt.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwipopts.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/debug.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/arch.h \
+ D:\Oxygen\chicken\LWIP/arch/cc.h D:\Oxygen\chicken\LWIP/arch/cpu.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/err.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip_addr.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/def.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/pbuf.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwip_comm.h \
+ D:\Oxygen\chicken\LWIP\LAN8720/lan8720.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\tcp_server_demo/tcp_server_demo.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/stats.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/mem.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp_std.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h \
+ D:\Oxygen\chicken\uc-bsp/pcf8574.h
 
 D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal.h:
 
@@ -364,3 +386,51 @@ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
 D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h:
 
 D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_rtc.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_net.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/netif.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/opt.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwipopts.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/debug.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/arch.h:
+
+D:\Oxygen\chicken\LWIP/arch/cc.h:
+
+D:\Oxygen\chicken\LWIP/arch/cpu.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/err.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip_addr.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/def.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/pbuf.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwip_comm.h:
+
+D:\Oxygen\chicken\LWIP\LAN8720/lan8720.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\tcp_server_demo/tcp_server_demo.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/stats.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/mem.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp_std.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h:
+
+D:\Oxygen\chicken\uc-bsp/pcf8574.h:

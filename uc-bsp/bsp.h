@@ -80,6 +80,9 @@ extern "C"
 #include  "bsp_nand.h"
 #include  "bsp_sdcard.h"
 #include  "usbh_core.h"
+#include  "bsp_rtc.h"
+#include  "bsp_net.h"
+#include  "pcf8574.h"
 /*
  *********************************************************************************************************
  *                                               CONSTANTS
@@ -109,13 +112,12 @@ extern "C"
  *                                                 MACRO'S
  *********************************************************************************************************
  */
-
+#define ETH_RST(n)              (n?HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_SET):HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_RESET))   //LCD±≥π‚PD13
 /*
  *********************************************************************************************************
  *                                           FUNCTION PROTOTYPES
  *********************************************************************************************************
  */
-
 void
 BSP_Init (void);
 

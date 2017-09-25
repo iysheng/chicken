@@ -59,6 +59,7 @@ extern _touch_dev tp_dev;
 extern struct rgb_parameter m19;
 extern SD_HandleTypeDef SDCARD_Handler;             //SD卡句柄
 extern USBH_ClassTypeDef  USBH_msc;
+extern __lwip_dev lwipdev;
 USBH_HandleTypeDef  USB_Host;
 
 /*
@@ -95,6 +96,9 @@ CPU_STK AppTaskObj3Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 OS_TCB AppTaskObj4TCB;
 CPU_STK AppTaskObj4Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 
+OS_TCB AppTaskObj5TCB;
+CPU_STK AppTaskObj5Stk[APP_CFG_TASK_OBJ_STK_SIZE];
+
 /*
  *********************************************************************************************************
  *                                         FUNCTION PROTOTYPES
@@ -116,7 +120,8 @@ static void
 AppTaskObj3 (void *p_arg);
 static void
 AppTaskObj4 (void *p_arg);
-
+static void
+AppTaskObj5 (void *p_arg);
 static void
 MessQueue_Init (void);
 /*
@@ -299,6 +304,7 @@ AppTaskCreate (void)
 		APP_CFG_TASK_OBJ_STK_SIZE,
 		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
 		&os_err);
+#if 0
   OSTaskCreate (&AppTaskObj4TCB, "Kernel Objects Task 4", AppTaskObj4, 0,
     APP_CFG_TASK_OBJ4_PRIO,
   		&AppTaskObj4Stk[0],
@@ -306,6 +312,14 @@ AppTaskCreate (void)
   		APP_CFG_TASK_OBJ_STK_SIZE,
   		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
   		&os_err);
+#endif
+  OSTaskCreate (&AppTaskObj5TCB, "Kernel Objects Task 5", AppTaskObj5, 0,
+      APP_CFG_TASK_OBJ5_PRIO,
+    		&AppTaskObj5Stk[0],
+    		AppTaskObj5Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
+    		APP_CFG_TASK_OBJ_STK_SIZE,
+    		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
+    		&os_err);
 }
 
 /*
@@ -522,6 +536,32 @@ AppTaskObj4 (void *p_arg)
 	      for(nand_id=0;nand_id++;nand_id<0xfffff);
 	      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &os_err);
       }
+}
+static void
+AppTaskObj5 (void *p_arg)
+{
+  OS_ERR os_err;
+  (void) p_arg;
+  uint32_t ret;
+  PCF8574_Init();
+  printf("start---net---lwip\r\n");
+  do{
+    ret = lwip_comm_init();
+    printf("waiting---net---init\r\n");
+  } while(ret==1);
+#if LWIP_DHCP
+  while((lwipdev.dhcpstatus!=2)&&(lwipdev.dhcpstatus!=0XFF))//等待DHCP获取成功/超时溢出
+  	{
+  		lwip_periodic_handle();	//LWIP内核需要定时处理的函数
+  		printf("waiting---net---dhcp\r\n");
+  	}
+#endif
+  while (DEF_TRUE)
+        {
+      printf("hello net lwip\r\n");
+      //tcp_server_test();
+      tcp_client_test();
+        }
 }
 void
 MessQueue_Init (void)

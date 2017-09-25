@@ -51,8 +51,7 @@ struct rgb_parameter{
 #define LBBLUE           0X2B12 //浅棕蓝色(选择条目的反色)
 
 LTDC_HandleTypeDef LTDC_Handler;	    //LTDC句柄
-#define LCD_LED(n)              (n?HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_SET):HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_RESET))   //LCD背光PD13              //LCD背光PD13
-
+#define LCD_LED(n)              (n?HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_SET):HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_RESET))   //LCD背光PD13
 #define LCD_PIXEL_FORMAT_RGB565         0X02
 //定义颜色像素格式,一般用RGB565
 #define LCD_PIXFORMAT				LCD_PIXEL_FORMAT_RGB565

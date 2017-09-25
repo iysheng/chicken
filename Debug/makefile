@@ -23,6 +23,14 @@ RM := rm -rf
 -include STM32_USB_Host_Library/Core/Src/subdir.mk
 -include STM32_USB_Host_Library/Core/Inc/subdir.mk
 -include STM32_USB_Host_Library/Class/MSC/Src/subdir.mk
+-include LWIP/lwip_app/tcp_client_demo/subdir.mk
+-include LWIP/lwip_app/lwip_comm/subdir.mk
+-include LWIP/lwip-1.4.1/src/netif/subdir.mk
+-include LWIP/lwip-1.4.1/src/core/ipv4/subdir.mk
+-include LWIP/lwip-1.4.1/src/core/subdir.mk
+-include LWIP/lwip-1.4.1/src/api/subdir.mk
+-include LWIP/arch/subdir.mk
+-include LWIP/LAN8720/subdir.mk
 -include GUI/Core/subdir.mk
 -include Config/subdir.mk
 -include subdir.mk

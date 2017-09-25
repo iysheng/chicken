@@ -7,13 +7,13 @@
 
 #include "main.h"
 
-TIM_HandleTypeDef ITIM2,ITIM3,ITIM5;
+TIM_HandleTypeDef ITIM2,ITIM3,ITIM4,ITIM5;
 TIM_MasterConfigTypeDef iMasterConfig;
 TIM_OC_InitTypeDef iConfig;
 int32_t ic_value[2];//捕获的计数值
 extern OS_Q RPM_Q;
 extern OS_TCB      AppTaskObj1TCB;
-
+extern uint32_t lwip_localtime;		//lwip本地时间计数器,单位:ms
 void TIM2_init(void)
 {
   __HAL_RCC_TIM2_CLK_ENABLE();
@@ -43,6 +43,18 @@ void TIM3_init(void)
   HAL_TIM_PWM_Start(&ITIM3,TIM_CHANNEL_4);
   //HAL_TIM_PWM_ConfigChannel(&ITIM3,&iConfig,TIM_CHANNEL_3); //PB0
   //HAL_TIM_PWM_Start(&ITIM3,TIM_CHANNEL_3);
+}
+
+void TIM4_Init()
+{
+  __HAL_RCC_TIM4_CLK_ENABLE();
+  ITIM4.Instance=TIM4;                          //通用定时器3
+  ITIM4.Init.Prescaler=1079;                     //分频
+  ITIM4.Init.CounterMode=TIM_COUNTERMODE_UP;    //向上计数器
+  ITIM4.Init.Period=999;                        //自动装载值
+  ITIM4.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//时钟分频因子
+  HAL_TIM_Base_Init(&ITIM4);
+  HAL_TIM_Base_Start_IT(&ITIM4); //使能定时器3和定时器3更新中断：TIM_IT_UPDATE
 }
 
 void TIM5_init(void)
@@ -81,17 +93,30 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   }
 }
 
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
+void
+HAL_TIM_Base_MspInit (TIM_HandleTypeDef *htim)
 {
-  if(htim->Instance==TIM2){
-    __HAL_RCC_TIM2_CLK_ENABLE();
-    HAL_NVIC_EnableIRQ(TIM2_IRQn);
-    HAL_NVIC_SetPriority(TIM2_IRQn, 0x0, 2);
-  }else if(htim->Instance==TIM3){
-    __HAL_RCC_TIM3_CLK_ENABLE();
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0x0, 3);
-  }
+  if (htim->Instance == TIM2)
+    {
+      __HAL_RCC_TIM2_CLK_ENABLE()
+      ;
+      HAL_NVIC_EnableIRQ (TIM2_IRQn);
+      HAL_NVIC_SetPriority (TIM2_IRQn, 0x0, 2);
+    }
+  else if (htim->Instance == TIM3)
+    {
+      __HAL_RCC_TIM3_CLK_ENABLE()
+      ;
+      HAL_NVIC_EnableIRQ (TIM3_IRQn);
+      HAL_NVIC_SetPriority (TIM3_IRQn, 0x0, 3);
+    }
+  else if (htim->Instance == TIM4)
+    {
+      __HAL_RCC_TIM4_CLK_ENABLE()
+      ;            //使能TIM4时钟
+      HAL_NVIC_SetPriority (TIM4_IRQn, 1, 0);    //设置中断优先级，抢占优先级1，子优先级3
+      HAL_NVIC_EnableIRQ (TIM4_IRQn);          //开启ITM3中断
+    }
 }
 
 void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
@@ -124,7 +149,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   else if(htim->Instance==TIM3)
   {
+      //lwip_localtime +=10; //加10
   }
+  else if(htim->Instance==TIM4)
+   {
+       lwip_localtime +=10; //加10
+   }
 }
 
 void TIM2_IRQHandler(void){
@@ -135,6 +165,11 @@ void TIM2_IRQHandler(void){
 
 void TIM3_IRQHandler(void){
   HAL_TIM_IRQHandler(&ITIM3);
+}
+
+void TIM4_IRQHandler(void)
+{
+    HAL_TIM_IRQHandler(&ITIM4);
 }
 
 void TIM5_IRQHandler(void){

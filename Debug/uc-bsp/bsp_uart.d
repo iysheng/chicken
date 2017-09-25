@@ -73,7 +73,61 @@ uc-bsp/bsp_uart.o: ../uc-bsp/bsp_uart.c ../uc-bsp/bsp_uart.h \
  D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_hcd.h \
  D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_dfsdm.h \
  D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_jpeg.h \
- D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_mdios.h
+ D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_mdios.h \
+ D:\Oxygen\chicken\hallib/main.h D:\Oxygen\chicken\uc-bsp/bsp.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_uart.h D:\Oxygen\chicken\uc-bsp/bsp_tim.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_clock.h D:\Oxygen\chicken\uc-bsp/bsp_led.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_sdram.h D:\Oxygen\chicken\uc-bsp/bsp_rgb.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_adc.h D:\Oxygen\chicken\uc-bsp/bsp_touch.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_nand.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_sdcard.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h \
+ D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h \
+ D:\Oxygen\chicken\uc-bsp/bsp_rtc.h D:\Oxygen\chicken\uc-bsp/bsp_net.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/netif.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/opt.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwipopts.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/debug.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/arch.h \
+ D:\Oxygen\chicken\LWIP/arch/cc.h D:\Oxygen\chicken\LWIP/arch/cpu.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/err.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip_addr.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/def.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/pbuf.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwip_comm.h \
+ D:\Oxygen\chicken\LWIP\LAN8720/lan8720.h \
+ D:\Oxygen\chicken\LWIP\lwip_app\tcp_server_demo/tcp_server_demo.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/stats.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/mem.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp_std.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h \
+ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h \
+ D:\Oxygen\chicken\uc-bsp/pcf8574.h D:\Oxygen\chicken\GUI\inc/GUI.h \
+ D:\Oxygen\chicken\GUI\inc/GUI_ConfDefaults.h \
+ D:\Oxygen\chicken\Config/GUIConf.h D:\Oxygen\chicken\GUI\inc/GUI_Type.h \
+ D:\Oxygen\chicken\GUI\inc/LCD.h D:\Oxygen\chicken\GUI\inc/Global.h \
+ D:\Oxygen\chicken\GUI\inc/GUI_Version.h D:\Oxygen\chicken\GUI\inc/WM.h \
+ D:\Oxygen\chicken\GUI\inc/WM_GUI.h D:\Oxygen\chicken\GUI\inc/GUI.h \
+ D:\Oxygen\chicken\GUI\inc/FRAMEWIN.h D:\Oxygen\chicken\GUI\inc/WM.h \
+ D:\Oxygen\chicken\GUI\inc/WIDGET.h D:\Oxygen\chicken\GUI\inc/WM_Intern.h \
+ D:\Oxygen\chicken\GUI\inc/GUI_Private.h \
+ D:\Oxygen\chicken\GUI\inc/LCD_Protected.h \
+ D:\Oxygen\chicken\GUI\inc/GUI_Debug.h \
+ D:\Oxygen\chicken\GUI\inc/SCROLLBAR.h \
+ D:\Oxygen\chicken\GUI\inc/DIALOG_Intern.h \
+ D:\Oxygen\chicken\uCOS-III\Source/os.h \
+ D:\Oxygen\chicken\uc-config/os_cfg.h \
+ D:\Oxygen\chicken\uc-config/os_cfg_app.h \
+ D:\Oxygen\chicken\uCOS-III\Source/os_type.h \
+ D:\Oxygen\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h \
+ D:\Oxygen\chicken\uCOS-III\Source/os_trace.h
 
 ../uc-bsp/bsp_uart.h:
 
@@ -238,3 +292,139 @@ D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_dfsdm.h:
 D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_jpeg.h:
 
 D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal_mdios.h:
+
+D:\Oxygen\chicken\hallib/main.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_uart.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_tim.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_clock.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_led.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_sdram.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_rgb.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_adc.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_touch.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_nand.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_sdcard.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_conf.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_def.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ioreq.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_core.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_pipes.h:
+
+D:\Oxygen\chicken\STM32_USB_Host_Library\Core\Inc/usbh_ctlreq.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_rtc.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_net.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/netif.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/opt.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwipopts.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/debug.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/arch.h:
+
+D:\Oxygen\chicken\LWIP/arch/cc.h:
+
+D:\Oxygen\chicken\LWIP/arch/cpu.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/err.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip_addr.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/def.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/pbuf.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\lwip_comm/lwip_comm.h:
+
+D:\Oxygen\chicken\LWIP\LAN8720/lan8720.h:
+
+D:\Oxygen\chicken\LWIP\lwip_app\tcp_server_demo/tcp_server_demo.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/stats.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/mem.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/memp_std.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h:
+
+D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h:
+
+D:\Oxygen\chicken\uc-bsp/pcf8574.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI_ConfDefaults.h:
+
+D:\Oxygen\chicken\Config/GUIConf.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI_Type.h:
+
+D:\Oxygen\chicken\GUI\inc/LCD.h:
+
+D:\Oxygen\chicken\GUI\inc/Global.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI_Version.h:
+
+D:\Oxygen\chicken\GUI\inc/WM.h:
+
+D:\Oxygen\chicken\GUI\inc/WM_GUI.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI.h:
+
+D:\Oxygen\chicken\GUI\inc/FRAMEWIN.h:
+
+D:\Oxygen\chicken\GUI\inc/WM.h:
+
+D:\Oxygen\chicken\GUI\inc/WIDGET.h:
+
+D:\Oxygen\chicken\GUI\inc/WM_Intern.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI_Private.h:
+
+D:\Oxygen\chicken\GUI\inc/LCD_Protected.h:
+
+D:\Oxygen\chicken\GUI\inc/GUI_Debug.h:
+
+D:\Oxygen\chicken\GUI\inc/SCROLLBAR.h:
+
+D:\Oxygen\chicken\GUI\inc/DIALOG_Intern.h:
+
+D:\Oxygen\chicken\uCOS-III\Source/os.h:
+
+D:\Oxygen\chicken\uc-config/os_cfg.h:
+
+D:\Oxygen\chicken\uc-config/os_cfg_app.h:
+
+D:\Oxygen\chicken\uCOS-III\Source/os_type.h:
+
+D:\Oxygen\chicken\uCOS-III\Ports\ARM-Cortex-M\ARMv7-M\GNU/os_cpu.h:
+
+D:\Oxygen\chicken\uCOS-III\Source/os_trace.h:

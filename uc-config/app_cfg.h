@@ -55,6 +55,7 @@
 #define  APP_CFG_TASK_OBJ2_PRIO                  15u
 #define  APP_CFG_TASK_OBJ3_PRIO                  16u
 #define  APP_CFG_TASK_OBJ4_PRIO                  10u
+#define  APP_CFG_TASK_OBJ5_PRIO                  11u
 
 /*
 *********************************************************************************************************
