@@ -256,7 +256,7 @@ AppTaskStart (void *p_arg)
   while (DEF_TRUE)
     { /* Task body, always written as an infinite loop.       */
       OSTaskDel ((OS_TCB*) 0, &err);
-      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &err);
+      //OSTimeDlyHMSM (1, 0, 10, 0, OS_OPT_TIME_DLY, &err);
     }
 }
 
@@ -355,8 +355,6 @@ AppTaskObj0 (void *p_arg)
   static uint32_t uitemp;
   static char rstr[64];
   GUI_Init ();
-  GUI_SetBkColor (BK_HY_COLOR);
-  GUI_Clear ();
   GUI_DispStringAt ("yangyongsheng", 100, 100);
   HAL_ADC_Start_DMA (&ICEKONG, (uint32_t *) raw_icekong, IDAC_COUNT);
   while (DEF_TRUE)
@@ -429,12 +427,10 @@ AppTaskObj1 (void *p_arg)
 	  hole_ic_value = (*rpm_value);
 	  hole_ic_value += *(rpm_value + 1);
 	  *rpm_value = hole_ic_value / 1000;
-	  //sprintf ((char *) rstr, "PWM:%6dms...%6lldus", (int) (*rpm_value),
-	  //   (long long int) hole_ic_value);
-	  snprintf ((char *) rstr, 15, "PWM:%dms", (int) (*rpm_value));
+	  sprintf (rstr, "PWM:%6dms", *rpm_value);
 	  GUI_DispStringAt ((const char *) rstr, 400, 400);
-	  printf ("task1 %s &msg_size is %d\r\n", rstr, (int) msg_size);
-	  //*rpm_value = 0x00;
+	  printf ("%s\r\n", rstr);
+	  OSTimeDlyHMSM (0, 0, 5, 0, OS_OPT_TIME_DLY, &os_err);
 	}
       APP_TRACE_INFO(("Object test task 1 running ....\r\n"));
     }
@@ -454,7 +450,7 @@ AppTaskObj2 (void *p_arg)
 
       if (os_err == OS_ERR_NONE)
 	{
-	  BSP_BEEP_1();
+	  BSP_BEEP_1 ();
 	  GUI_TOUCH_Exec ();
 	  FT5206_Scan ();
 	  if (tp_dev.sta != 0)

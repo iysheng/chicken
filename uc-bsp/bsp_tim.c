@@ -18,7 +18,7 @@ void TIM2_init(void)
 {
   __HAL_RCC_TIM2_CLK_ENABLE();
   ITIM2.Instance=TIM2;
-  ITIM2.Init.Period=1999;//周期为1000ms,频率1Hz
+  ITIM2.Init.Period=1999;//周期为1999<-->1000ms,频率1Hz
   ITIM2.Init.Prescaler=53999;//APB1=108MHz,采样时钟间隔为500us，频率为2khz
   ITIM2.Init.CounterMode=TIM_COUNTERMODE_UP;
   HAL_TIM_Base_Init(&ITIM2);
@@ -32,12 +32,12 @@ void TIM3_init(void)
 {
   __HAL_RCC_TIM3_CLK_ENABLE();
   ITIM3.Instance=TIM3;
-  ITIM3.Init.Period=1999;//周期为1999--1000ms，频率为1hz
+  ITIM3.Init.Period=499;//周期为1999<-->1000ms，频率为1hz
   ITIM3.Init.Prescaler=53999;//采样时钟间隔为500us，频率为2khz
   ITIM3.Init.CounterMode=TIM_COUNTERMODE_UP;
   HAL_TIM_PWM_Init(&ITIM3);
   iConfig.OCMode=TIM_OCMODE_PWM1;
-  iConfig.Pulse=999;
+  iConfig.Pulse=299;
   iConfig.OCPolarity=TIM_OCPOLARITY_HIGH;
   HAL_TIM_PWM_ConfigChannel(&ITIM3,&iConfig,TIM_CHANNEL_4);//PB1
   HAL_TIM_PWM_Start(&ITIM3,TIM_CHANNEL_4);
@@ -60,7 +60,6 @@ void TIM4_Init()
 void TIM5_init(void)
 {
   static TIM_IC_InitTypeDef IC_Config;
-  //memset(&IC_Config,0,sizeof(IC_Config));
   __HAL_RCC_TIM5_CLK_ENABLE();
   ITIM5.Instance=TIM5;
   ITIM5.Init.Prescaler=107;//107--精度达到1us
@@ -72,8 +71,10 @@ void TIM5_init(void)
   IC_Config.ICPrescaler=TIM_ICPSC_DIV1;
   IC_Config.ICFilter=0;
   IC_Config.ICSelection=TIM_ICSELECTION_DIRECTTI;
-  HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_1);//TIM_CHANNEL_1 PA0
-  HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_1);//开启中断
+ // HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_1);//TIM_CHANNEL_1 PA0
+  //HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_1);//开启中断
+  HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_4);//TIM_CHANNEL_1 PA3
+    HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_4);//开启中断
   //HAL_TIM_IC_ConfigChannel(&ITIM5,&IC_Config,TIM_CHANNEL_2);//TIM_CHANNEL_2 PA1
   //HAL_TIM_IC_Start_IT(&ITIM5,TIM_CHANNEL_2);//开启中断
 }
@@ -128,12 +129,12 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
     HAL_NVIC_EnableIRQ(TIM5_IRQn);
     HAL_NVIC_SetPriority(TIM5_IRQn, 0x0, 2);  //开启TIM5中断
     __HAL_RCC_GPIOA_CLK_ENABLE();		//开启GPIOA时钟
-    GPIO_Initure.Pin=GPIO_PIN_0; //PA0
+    GPIO_Initure.Pin=GPIO_PIN_3; //PA3
     GPIO_Initure.Mode=GPIO_MODE_AF_PP;  //复用推挽输出
     GPIO_Initure.Pull=GPIO_PULLDOWN;          //上拉
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //高速
     GPIO_Initure.Alternate=GPIO_AF2_TIM5;
-    HAL_GPIO_Init(GPIOA,&GPIO_Initure);     //GPIOA0、TIM5的1通道
+    HAL_GPIO_Init(GPIOA,&GPIO_Initure);     //GPIOA3、TIM5的4通道
   }
 }
 
@@ -188,7 +189,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	    switch(ic_value[0]>>30)
 	    {
 	    case 0x00:ic_value[0]=1<<30;ic_value[1]=0x00;__HAL_TIM_DISABLE(htim);__HAL_TIM_SET_COUNTER(htim,0);__HAL_TIM_ENABLE(htim);break;//捕获第一个中断
-	    case 0x01:ic_value[0]|=1<<31;ic_value[1]=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+	    case 0x01:ic_value[0]|=1<<31;ic_value[1]=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
 	    OSQPost (&RPM_Q,
 	                   (void *)&ic_value[0],
 	                   1,
@@ -201,7 +202,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     switch(ic_value[0])
     {
     case 0x00:ic_value[0]=0x40;ic_value[1]=0x00;__HAL_TIM_DISABLE(htim);__HAL_TIM_SET_COUNTER(htim,0);__HAL_TIM_ENABLE(htim);break;//捕获第一个中断
-    case 0x40:ic_value[0]|=0x80;ic_value[1]=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+    case 0x40:ic_value[0]|=0x80;ic_value[1]=HAL_TIM_ReadCapturedValue(htim,4);
     OSTaskSemPost(&AppTaskObj1TCB,OS_OPT_POST_NONE,&err);break;//捕获第二个中断，完成一次周期捕获
     default:break;
     }
