@@ -58,9 +58,9 @@ extern ADC_HandleTypeDef ICEKONG;
 extern _touch_dev tp_dev;
 extern struct rgb_parameter m19;
 extern SD_HandleTypeDef SDCARD_Handler;             //SD卡句柄
-extern USBH_ClassTypeDef  USBH_msc;
+extern USBH_ClassTypeDef USBH_msc;
 extern __lwip_dev lwipdev;
-USBH_HandleTypeDef  USB_Host;
+USBH_HandleTypeDef USB_Host;
 
 /*
  *********************************************************************************************************
@@ -217,16 +217,17 @@ SD_ShowCardInfo ()
     }
   //printf ("Card RCA:%x\r\n", (unsigned int) cardInfo.RelCardAdd);        //卡相对地址
   printf ("Card Capacity:%u MB\r\n",
-	  (unsigned int) (cardInfo.BlockNbr * cardInfo.BlockSize) >> 20);//显示容量
+	  (unsigned int) (cardInfo.BlockNbr * cardInfo.BlockSize) >> 20); //显示容量
   //printf ("Card BlockNbr:%u\r\n", (unsigned int) cardInfo.BlockNbr);
   //printf ("Card BlockSize:%u\r\n", (unsigned int) cardInfo.BlockSize);//显示块大小
   return ret;
 }
 
-void usbh_pUsrFunc(USBH_HandleTypeDef *phost, uint8_t id)
-   {
-  printf("hello usbh_pUsrFunc-----id:%u----->\r\n",(unsigned int)id);
-    }
+void
+usbh_pUsrFunc (USBH_HandleTypeDef *phost, uint8_t id)
+{
+  printf ("hello usbh_pUsrFunc-----id:%u----->\r\n", (unsigned int) id);
+}
 
 static void
 AppTaskStart (void *p_arg)
@@ -236,6 +237,11 @@ AppTaskStart (void *p_arg)
   (void) p_arg;
   BSP_Init (); /* Initialize BSP functions                             */
   RGB_Init (&m19);
+  __HAL_RCC_CRC_CLK_ENABLE()
+  ;
+  GUI_Init ();
+  GUI_SetBkColor (BK_HY_COLOR);
+  GUI_Clear ();
 #if OS_CFG_STAT_TASK_EN > 0u
   OSStatTaskCPUUsageInit (&err); /* Compute CPU capacity with no task running            */
 #endif
@@ -306,20 +312,21 @@ AppTaskCreate (void)
 		&os_err);
 #if 0
   OSTaskCreate (&AppTaskObj4TCB, "Kernel Objects Task 4", AppTaskObj4, 0,
-    APP_CFG_TASK_OBJ4_PRIO,
-  		&AppTaskObj4Stk[0],
-  		AppTaskObj4Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
-  		APP_CFG_TASK_OBJ_STK_SIZE,
-  		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
-  		&os_err);
-#endif
+      APP_CFG_TASK_OBJ4_PRIO,
+      &AppTaskObj4Stk[0],
+      AppTaskObj4Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
+      APP_CFG_TASK_OBJ_STK_SIZE,
+      0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
+      &os_err);
+
   OSTaskCreate (&AppTaskObj5TCB, "Kernel Objects Task 5", AppTaskObj5, 0,
       APP_CFG_TASK_OBJ5_PRIO,
-    		&AppTaskObj5Stk[0],
-    		AppTaskObj5Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
-    		APP_CFG_TASK_OBJ_STK_SIZE,
-    		0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
-    		&os_err);
+      &AppTaskObj5Stk[0],
+      AppTaskObj5Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
+      APP_CFG_TASK_OBJ_STK_SIZE,
+      0u, 0u, 0, (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
+      &os_err);
+#endif
 }
 
 /*
@@ -348,6 +355,9 @@ AppTaskObj0 (void *p_arg)
   static uint32_t uitemp;
   static char rstr[64];
   GUI_Init ();
+  GUI_SetBkColor (BK_HY_COLOR);
+  GUI_Clear ();
+  GUI_DispStringAt ("yangyongsheng", 100, 100);
   HAL_ADC_Start_DMA (&ICEKONG, (uint32_t *) raw_icekong, IDAC_COUNT);
   while (DEF_TRUE)
     {
@@ -444,6 +454,7 @@ AppTaskObj2 (void *p_arg)
 
       if (os_err == OS_ERR_NONE)
 	{
+	  BSP_BEEP_1();
 	  GUI_TOUCH_Exec ();
 	  FT5206_Scan ();
 	  if (tp_dev.sta != 0)
@@ -505,37 +516,38 @@ AppTaskObj4 (void *p_arg)
   (void) p_arg;
   static char rstr[64];
   char nand_mode[32];
-    uint32_t nand_id;
+  uint32_t nand_id;
   __HAL_RCC_CRC_CLK_ENABLE()
-    ;
-    GUI_Init ();
-    USBH_Init(&USB_Host,&usbh_pUsrFunc,USB_OTG_FS_CORE_ID);
-    USBH_RegisterClass(&USB_Host,&USBH_msc);
-    USBH_Start(&USB_Host);
-    GUI_SetBkColor (BK_HY_COLOR);
-    GUI_Clear ();
-    GUI_CURSOR_Show ();
-    GUI_CURSOR_Select (&GUI_CursorCrossL);
-    GUI_PID_STATE touchState;
-    GUI_TOUCH_Calibrate (GUI_COORD_X, 0, m19.width, 0, m19.width - 1);
-    GUI_TOUCH_Calibrate (GUI_COORD_Y, 0, m19.height, 0, m19.height - 1);
-    GUI_DispStringAt ("iysheng@163.com", 100, 100);
-    while (DEF_TRUE)
-      {
-	GUI_TOUCH_GetState (&touchState);
-	      GUI_GotoXY (0, 250);
-	      GUI_DispString ("x:");
-	      GUI_DispDec ((touchState.x)++, 4);
-	      GUI_DispString (" y:");
-	      GUI_DispDec (touchState.y, 4);
-	      nand_id = NAND_ReadID ();
-	      sprintf (nand_mode, "%x", (unsigned int) nand_id);
-	      printf ("nand_mode is %s.\r\n", nand_mode);
-	      SD_ShowCardInfo ();
-	      USBH_Process(&USB_Host);
-	      for(nand_id=0;nand_id++;nand_id<0xfffff);
-	      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &os_err);
-      }
+  ;
+  GUI_Init ();
+  USBH_Init (&USB_Host, &usbh_pUsrFunc, USB_OTG_FS_CORE_ID);
+  USBH_RegisterClass (&USB_Host, &USBH_msc);
+  USBH_Start (&USB_Host);
+  GUI_SetBkColor (BK_HY_COLOR);
+  GUI_Clear ();
+  GUI_CURSOR_Show ();
+  GUI_CURSOR_Select (&GUI_CursorCrossL);
+  GUI_PID_STATE touchState;
+  GUI_TOUCH_Calibrate (GUI_COORD_X, 0, m19.width, 0, m19.width - 1);
+  GUI_TOUCH_Calibrate (GUI_COORD_Y, 0, m19.height, 0, m19.height - 1);
+  GUI_DispStringAt ("iysheng@163.com", 100, 100);
+  while (DEF_TRUE)
+    {
+      GUI_TOUCH_GetState (&touchState);
+      GUI_GotoXY (0, 250);
+      GUI_DispString ("x:");
+      GUI_DispDec ((touchState.x)++, 4);
+      GUI_DispString (" y:");
+      GUI_DispDec (touchState.y, 4);
+      nand_id = NAND_ReadID ();
+      sprintf (nand_mode, "%x", (unsigned int) nand_id);
+      printf ("nand_mode is %s.\r\n", nand_mode);
+      SD_ShowCardInfo ();
+      USBH_Process (&USB_Host);
+      for (nand_id = 0; nand_id++; nand_id < 0xfffff)
+	;
+      //OSTimeDlyHMSM (0, 0, 10, 0, OS_OPT_TIME_DLY, &os_err);
+    }
 }
 static void
 AppTaskObj5 (void *p_arg)
@@ -543,25 +555,27 @@ AppTaskObj5 (void *p_arg)
   OS_ERR os_err;
   (void) p_arg;
   uint32_t ret;
-  PCF8574_Init();
-  printf("start---net---lwip\r\n");
-  do{
-    ret = lwip_comm_init();
-    printf("waiting---net---init\r\n");
-  } while(ret==1);
+  PCF8574_Init ();
+  printf ("start---net---lwip\r\n");
+  do
+    {
+      ret = lwip_comm_init ();
+      printf ("waiting---net---init\r\n");
+    }
+  while (ret == 1);
 #if LWIP_DHCP
-  while((lwipdev.dhcpstatus!=2)&&(lwipdev.dhcpstatus!=0XFF))//等待DHCP获取成功/超时溢出
-  	{
-  		lwip_periodic_handle();	//LWIP内核需要定时处理的函数
-  		printf("waiting---net---dhcp\r\n");
-  	}
+  while ((lwipdev.dhcpstatus != 2) && (lwipdev.dhcpstatus != 0XFF))//等待DHCP获取成功/超时溢出
+    {
+      lwip_periodic_handle ();	//LWIP内核需要定时处理的函数
+      printf ("waiting---net---dhcp\r\n");
+    }
 #endif
   while (DEF_TRUE)
-        {
-      printf("hello net lwip\r\n");
+    {
+      printf ("hello net lwip\r\n");
       //tcp_server_test();
-      tcp_client_test();
-        }
+      tcp_client_test ();
+    }
 }
 void
 MessQueue_Init (void)

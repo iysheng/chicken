@@ -92,7 +92,7 @@ void GUI_X_Config(void) {
   // Assign memory to emWin
   //
   GUI_ALLOC_AssignMemory(aMemory, GUI_NUMBYTES);
-  GUITASK_SetMaxTask(5);
+  GUITASK_SetMaxTask(7);
   //
   // Set default font
   //

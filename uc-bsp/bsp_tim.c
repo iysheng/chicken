@@ -160,6 +160,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void TIM2_IRQHandler(void){
   OSIntEnter();
   HAL_TIM_IRQHandler(&ITIM2);
+  BSP_LED_Toggle(2);
   OSIntExit();
 }
 

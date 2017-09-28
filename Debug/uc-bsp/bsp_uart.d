@@ -109,7 +109,8 @@ uc-bsp/bsp_uart.o: ../uc-bsp/bsp_uart.c ../uc-bsp/bsp_uart.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h \
- D:\Oxygen\chicken\uc-bsp/pcf8574.h D:\Oxygen\chicken\GUI\inc/GUI.h \
+ D:\Oxygen\chicken\uc-bsp/pcf8574.h D:\Oxygen\chicken\uc-bsp/bsp_beep.h \
+ D:\Oxygen\chicken\GUI\inc/GUI.h \
  D:\Oxygen\chicken\GUI\inc/GUI_ConfDefaults.h \
  D:\Oxygen\chicken\Config/GUIConf.h D:\Oxygen\chicken\GUI\inc/GUI_Type.h \
  D:\Oxygen\chicken\GUI\inc/LCD.h D:\Oxygen\chicken\GUI\inc/Global.h \
@@ -378,6 +379,8 @@ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h:
 D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h:
 
 D:\Oxygen\chicken\uc-bsp/pcf8574.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_beep.h:
 
 D:\Oxygen\chicken\GUI\inc/GUI.h:
 

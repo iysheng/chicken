@@ -3,7 +3,7 @@
 
 #include  <cpu_core.h>
 
-#define UART_DEBUG_PORT USART1
+#define UART_DEBUG_PORT USART2
 
 void BSP_UART_Init(void);
 

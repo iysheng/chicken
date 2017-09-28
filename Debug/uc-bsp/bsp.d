@@ -126,7 +126,7 @@ uc-bsp/bsp.o: ../uc-bsp/bsp.c D:\Oxygen\chicken\uC-CPU/cpu_core.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h \
- ../uc-bsp/pcf8574.h ../uc-bsp/bsp_os.h
+ ../uc-bsp/pcf8574.h ../uc-bsp/bsp_beep.h ../uc-bsp/bsp_os.h
 
 D:\Oxygen\chicken\uC-CPU/cpu_core.h:
 
@@ -429,5 +429,7 @@ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h:
 D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h:
 
 ../uc-bsp/pcf8574.h:
+
+../uc-bsp/bsp_beep.h:
 
 ../uc-bsp/bsp_os.h:

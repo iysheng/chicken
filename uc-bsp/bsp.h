@@ -83,6 +83,7 @@ extern "C"
 #include  "bsp_rtc.h"
 #include  "bsp_net.h"
 #include  "pcf8574.h"
+#include  "bsp_beep.h"
 /*
  *********************************************************************************************************
  *                                               CONSTANTS

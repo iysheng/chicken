@@ -111,16 +111,18 @@ void  BSP_LED_Init (void)
     GPIO_InitTypeDef  gpio_init;
 
     __HAL_RCC_GPIOB_CLK_ENABLE();                               /* Enable GPIO clock for LED1(PF10)                     */
-
+    __HAL_RCC_GPIOI_CLK_ENABLE();
                                                                 /* Configure the GPIOB for LED1(PF10)                   */
     gpio_init.Pin   = BSP_LED0_GPIOB_PIN|BSP_LED1_GPIOB_PIN;
     gpio_init.Mode  = GPIO_MODE_OUTPUT_PP;
     gpio_init.Pull  = GPIO_PULLUP;
     gpio_init.Speed = GPIO_SPEED_HIGH;
     HAL_GPIO_Init(GPIOB, &gpio_init);
-
+    gpio_init.Pin   = GPIO_PIN_11;
+    HAL_GPIO_Init(GPIOI, &gpio_init);
     BSP_LED_Off(0u);
     BSP_LED_Off(1u);
+    BSP_LED_On(2u);
 }
 
 
@@ -148,7 +150,9 @@ void  BSP_LED_Off (CPU_INT08U  led)
     switch (led) {
         case 0u:HAL_GPIO_WritePin(GPIOB, BSP_LED0_GPIOB_PIN, GPIO_PIN_SET);break;
         case 1u:HAL_GPIO_WritePin(GPIOB, BSP_LED1_GPIOB_PIN, GPIO_PIN_SET);break;
+        case 2u:HAL_GPIO_WritePin(GPIOI, GPIO_PIN_11, GPIO_PIN_RESET);break;
         default:
+          HAL_GPIO_WritePin(GPIOI, GPIO_PIN_11, GPIO_PIN_RESET);
              HAL_GPIO_WritePin(GPIOB, BSP_LED0_GPIOB_PIN, GPIO_PIN_SET);
              HAL_GPIO_WritePin(GPIOB, BSP_LED1_GPIOB_PIN, GPIO_PIN_SET);
              break;
@@ -179,7 +183,9 @@ void  BSP_LED_On (CPU_INT08U  led)
     switch (led) {
         case 0u:HAL_GPIO_WritePin(GPIOB, BSP_LED0_GPIOB_PIN, GPIO_PIN_RESET);break;
         case 1u:HAL_GPIO_WritePin(GPIOB, BSP_LED1_GPIOB_PIN, GPIO_PIN_RESET);break;
+        case 2u:HAL_GPIO_WritePin(GPIOI, GPIO_PIN_11, GPIO_PIN_SET);break;
         default:
+          HAL_GPIO_WritePin(GPIOI, GPIO_PIN_11, GPIO_PIN_SET);
              HAL_GPIO_WritePin(GPIOB, BSP_LED0_GPIOB_PIN, GPIO_PIN_RESET);
              HAL_GPIO_WritePin(GPIOB, BSP_LED1_GPIOB_PIN, GPIO_PIN_RESET);
              break;
@@ -211,7 +217,9 @@ void  BSP_LED_Toggle (CPU_INT08U  led)
     switch (led) {
         case 0u:HAL_GPIO_TogglePin(GPIOB, BSP_LED0_GPIOB_PIN);break;
         case 1u:HAL_GPIO_TogglePin(GPIOB, BSP_LED1_GPIOB_PIN);break;
+        case 2u:HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_11);break;
         default:
+          HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_11);
              HAL_GPIO_TogglePin(GPIOB, BSP_LED0_GPIOB_PIN);
              HAL_GPIO_TogglePin(GPIOB, BSP_LED1_GPIOB_PIN);
              break;

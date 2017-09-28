@@ -129,7 +129,7 @@ uc-config/app_main.o: ../uc-config/app_main.c \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include/lwip/tcp.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h \
  D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h \
- D:\Oxygen\chicken\uc-bsp/pcf8574.h
+ D:\Oxygen\chicken\uc-bsp/pcf8574.h D:\Oxygen\chicken\uc-bsp/bsp_beep.h
 
 D:\Oxygen\chicken\hallib\Inc/stm32f7xx_hal.h:
 
@@ -434,3 +434,5 @@ D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/ip.h:
 D:\Oxygen\chicken\LWIP\lwip-1.4.1\src\include\ipv4/lwip/icmp.h:
 
 D:\Oxygen\chicken\uc-bsp/pcf8574.h:
+
+D:\Oxygen\chicken\uc-bsp/bsp_beep.h:
